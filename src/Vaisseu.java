@@ -1,3 +1,5 @@
+import javafx.scene.shape.Rectangle;
+
 /**
  * Created by Chroon on 2016-10-25.
  */
@@ -35,34 +37,41 @@ public class Vaisseu {
 
 
     public  void accelerer(boolean accelerationJoueur){
-        System.out.println(accelerationJoueur);
+        //System.out.println(accelerationJoueur);
+        double radian= Math.toRadians(rotation);
+
         if(accelerationJoueur) {
-            System.out.println("test");
-            //accelationx=(float)(0.02f*Math.cos(rotation));
-            accelationy = (float) (0.05f * Math.sin(rotation));
+            //System.out.println("test");
+            accelationx = (float)(0.05f*Math.cos(radian));
+            accelationy = (float) (0.05f * Math.sin(radian));
         }
-        else  if(!accelerationJoueur)
-            accelationy=0;
+        else  if(!accelerationJoueur) {
+            accelationy = 0;
+            accelationx = 0;
+        }
+
 
         vitessey+=0.0098f-accelationy;
-        //vitessex+=accelationx;
+        vitessex-=accelationx;
     }
 
     public int getRotation(){
         return  rotation;
     }
 
-    public void rotationDroite(){
+    public void rotationDroite(Rectangle vaisseau){
         if (rotation==0)
             rotation=359;
         else
             rotation--;
+        vaisseau.setRotate(rotation-90);
     }
 
-    public void rotationGauche(){
+    public void rotationGauche(Rectangle vaisseau){
         if(rotation==359)
             rotation=0;
         else
             rotation++;
+        vaisseau.setRotate(rotation-90);
     }
 }
