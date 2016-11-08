@@ -61,17 +61,17 @@ public class Vaisseu {
 
     public void rotationDroite(Rectangle vaisseau){
         if (rotation==0)
-            rotation=359;
+            rotation=355;
         else
-            rotation--;
+            rotation-=5;
         vaisseau.setRotate(rotation-90);
     }
 
     public void rotationGauche(Rectangle vaisseau){
-        if(rotation==359)
+        if(rotation==355)
             rotation=0;
         else
-            rotation++;
+            rotation+=5;
         vaisseau.setRotate(rotation-90);
     }
 }

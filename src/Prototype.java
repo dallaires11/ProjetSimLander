@@ -31,13 +31,19 @@ public class Prototype extends Application {
     int debPlat1;
     int debPlat2;
     int diff;
+    final int precision;
+    Vector<Integer> solH;
+    Timeline gravite;
+
     public Prototype(){
         vaisseu=new Vaisseu();
         vesseau= new Rectangle(650,100,20,20);
         accelerationJoueur=false;
+        solH= new Vector<>();
         debPlat1=(int)(Math.random()*40+60);
         debPlat2=(int)(Math.random()*22+110);
-        int diff=0;
+        diff=0;
+        precision=10;
         //20* Easy3 med 2 hard 1.5
 
 
@@ -49,18 +55,21 @@ public class Prototype extends Application {
                 .limit(140)
                 .forEach(i->sol.add(i));
         Path ground = new Path();
-        System.out.println(debPlat1+" "+debPlat2);
         for(int x=0;x<140;x++){
             if (x==0)
                 ground.getElements().add(new MoveTo(0,700-sol.get(x)));
             else if(x==debPlat1||x==debPlat2){
                 int h= 700- sol.get(x);
-                ground.getElements().addAll(new LineTo(x*10,h));
+                ground.getElements().addAll(new LineTo(x*precision,h));
                 x+=diff;
-                ground.getElements().addAll(new LineTo(x*10,h));
+                ground.getElements().addAll(new LineTo(x*precision,h));
+                for(int z=0;z<diff;z++){
+                    solH.add(h);
+                }
             }
             else {
-                ground.getElements().add(new LineTo((x*10),700-(sol.get(x))));
+                ground.getElements().add(new LineTo((x*precision),700-(sol.get(x))));
+                solH.add(700-(sol.get(x)));
             }
         }
 
@@ -74,19 +83,19 @@ public class Prototype extends Application {
         Label position = new Label("Position :" + vesseau.getTranslateY());
         Label acY = new Label("AccY: "+(vaisseu.getAccelationy()-0.0098));
         Label rotation = new Label("Rotation:"+vaisseu.getRotation());
+        Label hauteurVaisseau = new Label("");
+        Label hauteurSol = new Label("");
+        Label positionXVaisseau = new Label("");
         position.setTranslateY(10);
         acY.setTranslateY(20);
         rotation.setTranslateY(30);
+        hauteurVaisseau.setTranslateY(40);
+        positionXVaisseau.setTranslateY(50);
+        hauteurSol.setTranslateY(60);
         Alert difficul = new Alert(Alert.AlertType.CONFIRMATION);
         difficul.setTitle("Difficulte");
         difficul.setContentText("Veulliez choisir une difficulté");
 
-        Alert win = new Alert(Alert.AlertType.INFORMATION);
-        win.setTitle("Victoire!!!");
-        win.setContentText("Vous faites la fierte de votre mere");
-        Alert looser = new Alert(Alert.AlertType.INFORMATION);
-        looser.setTitle("Please try again later             GG EZ");
-        looser.setContentText("«Tu vas mourir seul»\n-Vincent Boily 2016");
 
         ButtonType easy= new ButtonType("Facile");
         ButtonType medium= new ButtonType("Moyen");
@@ -103,11 +112,11 @@ public class Prototype extends Application {
 
         Path montagne = creerSol(diff);
 
-        root.getChildren().addAll(vesseau,vitesse,position,acY,rotation,montagne);
+        root.getChildren().addAll(vesseau,vitesse,position,acY,rotation,montagne,hauteurSol,hauteurVaisseau,positionXVaisseau);
 
         Scene cena = new Scene(root, 1400, 700);
         cena.setOnKeyPressed(event -> {
-            if(event.getCode()== KeyCode.SPACE)
+            if(event.getCode()== KeyCode.Z)
                 accelerationJoueur=true;
             else if(event.getCode()== KeyCode.LEFT){
                 vaisseu.rotationDroite(vesseau);
@@ -117,11 +126,11 @@ public class Prototype extends Application {
             }
         });
         cena.setOnKeyReleased(event -> {
-            if(event.getCode()== KeyCode.SPACE)
+            if(event.getCode()== KeyCode.Z)
                 accelerationJoueur=false;
 
         });
-        Timeline gravite=new Timeline(new KeyFrame(
+        gravite=new Timeline(new KeyFrame(
                 Duration.millis(15), t->{
             vaisseu.accelerer(accelerationJoueur);
             vesseau.setTranslateY(vesseau.getTranslateY()+vaisseu.getVitesseY());
@@ -130,14 +139,17 @@ public class Prototype extends Application {
             position.setText("Position :" + vesseau.getTranslateY());
             acY.setText("AccY: "+(vaisseu.getAccelationy()-0.0098));
             rotation.setText("Rotation:"+vaisseu.getRotation());
-            if(peutetre(montagne))
+            hauteurVaisseau.setText("VaisseauY: "+(700-(vesseau.getTranslateY()+120)));
+            hauteurSol.setText("Hauteur Sol: "+(700-solH.get(((int)(vesseau.getTranslateX()+650)/precision))));
+            positionXVaisseau.setText("VaisseauX: "+((vesseau.getTranslateX()+650)/precision));
+            if(peutetre())
                 if(conditionvictoire()){
 
-                    win.showAndWait();
+                    win();
                     primaryStage.close();
                 }
                 else{
-                    looser.showAndWait();
+                    loose();
                     primaryStage.close();
                 }
         }
@@ -150,9 +162,13 @@ public class Prototype extends Application {
         primaryStage.show();
     }
 
-    boolean peutetre(Path ground){
-        if(vesseau.getBoundsInParent().intersects(ground.))
-            return true;
+    boolean peutetre(){
+        if((700-(vesseau.getTranslateY()+120))<=700-solH.get((int) (vesseau.getTranslateX()+650)/precision)||
+                (700-(vesseau.getTranslateY()+120))<=700-solH.get(((int) (vesseau.getTranslateX()+650)/precision))+1||
+                (700-(vesseau.getTranslateY()+120))<=700-solH.get((int) (vesseau.getTranslateX()+650)/precision)+2){
+            System.out.println("collision");
+            return  true;
+        }
         return  false;
     }
 
@@ -165,6 +181,23 @@ public class Prototype extends Application {
             }
         }
         return false;
+    }
+
+    void win(){
+        Alert win = new Alert(Alert.AlertType.INFORMATION);
+        win.setTitle("Victoire!!!");
+        win.setContentText("Vous faites la fierte de votre mere");
+        System.out.println("win");
+        gravite.stop();
+        win.showAndWait();
+    }
+    void loose(){
+        Alert looser = new Alert(Alert.AlertType.INFORMATION);
+        looser.setTitle("Please try again later             GG EZ");
+        looser.setContentText("«Tu vas mourir seul»\n-Vincent Boily 2016");
+        System.out.println("lose");
+        gravite.stop();
+        looser.showAndWait();
     }
 
 
