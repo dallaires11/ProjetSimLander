@@ -9,6 +9,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Group root = new Group();
         primaryStage.setScene(new Scene(root, 300, 275));
+        //Modification
         primaryStage.show();
     }
 
