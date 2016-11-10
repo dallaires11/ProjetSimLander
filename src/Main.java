@@ -4,18 +4,26 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import View.*;
 
 public class Main extends Application {
     Timeline timeline;
     Vaisseau vaisseau;
     double point;
+    Stage leStage;
+    Menu menu;
+
+
 
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        leStage=primaryStage;
+        menu=new Menu(leStage);
         Group root = new Group();
         //Temps 2 keyframe / timeline
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setTitle("SimLander");
+        primaryStage.setScene(menu.getSceneMenu());
         primaryStage.show();
     }
 

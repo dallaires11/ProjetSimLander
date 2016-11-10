@@ -3,5 +3,5 @@
  */
 package Controller;
 
-public class Déplacement {
+public class ControllerJeu {
 }
