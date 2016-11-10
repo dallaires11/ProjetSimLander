@@ -3,13 +3,19 @@
  */
 package Model;
 
-public class Vaisseau{
+import javafx.scene.Group;
+
+class Vaisseau extends Group {
     /*
-    Essence
-    Vitesse x y
-    Rotation
-    Position X Y ( a place d'un rectangle kind of)
-    Image
-    nom??? label qui suit
+    int essence;
+    double vitesseX, vitesseY;
+    int rotation;
+    int positionX, positionY;
+    Group imageVaisseau
+    Label nom;
     */
+
+    Vaisseau(){
+
+    }
 }
