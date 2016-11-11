@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 
-class Vaisseau extends Group {
+public class Vaisseau extends Group {
 
     private int essence;
     private double vitesseX, vitesseY;
