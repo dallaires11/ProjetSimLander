@@ -128,9 +128,15 @@ public class Choix {
         });
         pret.setOnAction(event -> {
             /*stage.setScene(Jeu)
+            Set Up Jeu
+            Jeu.setCouleur(choixplanete)
+            sol.creer(difficulter)
+            Vaisseau.setNom
             pop up controle
             pause 3s
-            demarer timeline
+            demarer timeline physique
+            si chaos==true
+            start timeline meteore
              */
         });
 
