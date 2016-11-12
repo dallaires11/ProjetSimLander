@@ -2,10 +2,13 @@
  * Created by Chroon on 2016-11-08.
  */
 package View;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Menu extends Group{
@@ -13,18 +16,23 @@ public class Menu extends Group{
     private Group root;
     private Button commencer,option,quitter;
     private ImageView fond,titre;
+    private VBox org;
 
     public Menu(Stage stage,Choix choix){
         fond=new ImageView("Image/cielEtoile.gif");
-        titre=new ImageView();
+        titre=new ImageView("Image/Logo.png");
         commencer=new Button("Commencer");
         option=new Button("Option");
         quitter=new Button("Quitter");
+        org=new VBox();
+        org.getChildren().addAll(titre,commencer,option,quitter);
+
         setText();
         setPosition(stage);
         setAction(stage,choix);
+
         root=new Group();
-        root.getChildren().addAll(fond,titre,commencer,option,quitter);
+        root.getChildren().addAll(fond,org);
         menu=new Scene(root,1400,700);
     }
 
@@ -33,14 +41,10 @@ public class Menu extends Group{
     }
 
     private void setPosition(Stage stage/*Option,Jeu*/){
-        titre.setTranslateX(700);
-        titre.setTranslateY(50);
-        commencer.setTranslateX(700);
-        commencer.setTranslateY(200);
-        option.setTranslateX(700);
-        option.setTranslateY(250);
-        quitter.setTranslateX(700);
-        quitter.setTranslateY(300);
+        org.setAlignment(Pos.CENTER);
+        org.setTranslateX(335);
+        org.setSpacing(20);
+        org.setPadding(new Insets(50,0,0,60));
         fond.fitHeightProperty().bind(stage.heightProperty());
         fond.fitWidthProperty().bind(stage.widthProperty());
     }
