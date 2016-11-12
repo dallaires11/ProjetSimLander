@@ -12,6 +12,7 @@ public class Main extends Application {
     double point;
     Stage leStage;
     Menu menu;
+    Choix choix;
 
 
 
@@ -19,7 +20,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         leStage=primaryStage;
-        menu=new Menu(leStage);
+        choix=new Choix(leStage);
+        menu=new Menu(leStage,choix);
         Group root = new Group();
         //Temps 2 keyframe / timeline
         primaryStage.setTitle("SimLander");

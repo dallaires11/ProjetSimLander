@@ -14,7 +14,7 @@ public class Menu extends Group{
     private Button commencer,option,quitter;
     private ImageView fond,titre;
 
-    public Menu(Stage stage){
+    public Menu(Stage stage,Choix choix){
         fond=new ImageView("Image/cielEtoile.gif");
         titre=new ImageView();
         commencer=new Button("Commencer");
@@ -22,7 +22,7 @@ public class Menu extends Group{
         quitter=new Button("Quitter");
         setText();
         setPosition(stage);
-        setAction(stage);
+        setAction(stage,choix);
         root=new Group();
         root.getChildren().addAll(fond,titre,commencer,option,quitter);
         menu=new Scene(root,1400,700);
@@ -45,22 +45,17 @@ public class Menu extends Group{
         fond.fitWidthProperty().bind(stage.widthProperty());
     }
 
-    private void setAction(Stage stage/*option, SceneJeu*/){
+    private void setAction(Stage stage,Choix choix){
         quitter.setOnAction(event -> {
             stage.close();
         });
         /*option.setOnAction(event -> {
             stage.setScene(Option.getSceneOption());
         });
+        */
         commencer.setOnAction(event -> {
-            stage.setScene(Option.getSceneChoix);
-
-
-            stage.setScene(Jeu.getSceneJeu);
-            Pause(2s)
-            Jeu.StartTimeline()
-            );
-        });*/
+            stage.setScene(choix.getSceneChoix());
+        });
 
     }
 
