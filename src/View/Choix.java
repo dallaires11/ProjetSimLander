@@ -3,7 +3,6 @@
  */
 package View;
 
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -23,7 +22,7 @@ public class Choix {
     private Group root;
     private VBox org,optionVaisseau,ensPlan1,ensPlan2,ensPlan3,ensPlan4;
     private HBox planete,difficulte;
-    private ImageView planete1,planete2,planete3,planete4,fond;
+    private ImageView planete1,planete2,planete3,planete4,fond,easter;
     private TextField nomVaisseau;
     private Text texte,terre,mars,lune,kaurava;
     private int choixPLanete;
@@ -40,6 +39,7 @@ public class Choix {
         pret=new Button("Prêt");
 
         fond=new ImageView("Image/cielEtoile.gif");
+        easter=new ImageView("Image/Easter.png");
         planete1=new ImageView("Image/Earth.png");
         planete2=new ImageView("Image/Mars.png");
         planete3=new ImageView("Image/Moon.png");
@@ -75,7 +75,7 @@ public class Choix {
         org.getChildren().addAll(planete,difficulte,optionVaisseau,pret);
 
         root= new Group();
-        root.getChildren().addAll(fond,org);
+        root.getChildren().addAll(fond,easter,org);
 
         setPosition(stage);
         setAction();
@@ -92,6 +92,10 @@ public class Choix {
         org.setAlignment(Pos.CENTER);
         org.setSpacing(100);
         org.setPadding(new Insets(20,30,20,45));
+        easter.setTranslateX(20);
+        easter.setTranslateY(220);
+        easter.setScaleX(0.01);
+        easter.setScaleY(0.01);
         fond.fitHeightProperty().bind(stage.heightProperty());
         fond.fitWidthProperty().bind(stage.widthProperty());
     }
