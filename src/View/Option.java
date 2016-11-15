@@ -25,6 +25,8 @@ public class Option {
     HBox opt1,opt2;
     VBox org;
 
+    //Mode que quand tu lache le gaz le vaisseau deveinnt invisible
+
     public Option(Stage leStage){
         fond=new ImageView("Image/cielEtoile.gif");
 

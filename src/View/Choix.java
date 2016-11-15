@@ -3,6 +3,7 @@
  */
 package View;
 
+import Controller.ControllerJeu;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -131,14 +132,8 @@ public class Choix {
             choixDifficulte=3;
         });
         pret.setOnAction(event -> {
-            /*stage.setScene(Jeu)
-            Set Up Jeu
-            Jeu.setCouleur(choixplanete)
-            sol.creer(difficulter)
-            Vaisseau.setNom
-            pop up controle
-            pause 3s
-            demarer timeline physique
+            //jeu.setJeu();
+            /*pop up controle
             si chaos==true
             start timeline meteore
              */

@@ -1,6 +1,9 @@
 package Model;
 
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
@@ -30,7 +33,7 @@ public class Sol {
         precision = 10;
     }
 
-    public void creerPath(int diff){
+    public void genererPath(int diff,int planete){
         Vector<Integer> temp = new Vector<>();
         IntStream.iterate(0, i -> i = (int) (Math.random() * 250))
                 .limit(140)
@@ -60,6 +63,7 @@ public class Sol {
             }
         }
         solPath = ground;
+        setPathColor(planete);
     }
 
     public Path getPath(){
@@ -70,7 +74,25 @@ public class Sol {
         return solValeurs;
     }
 
-    public void setPathColor(Color couleur){
-        solPath.setFill(couleur);
+    private void setPathColor(int planete){
+        switch (planete){
+            case 1:
+                solPath.setStroke(Color.GREEN);
+                break;
+            case 2:
+                solPath.setStroke(Color.DARKORANGE);
+                break;
+            case 3:
+                solPath.setStroke(Color.LIGHTGRAY);
+                break;
+            case 4:
+                LinearGradient lnGr=new LinearGradient(0,0,1,1,true, CycleMethod.NO_CYCLE,
+                        new Stop(0,Color.WHITE),new Stop(1,Color.BLACK));
+                solPath.setStroke(lnGr);
+                break;
+            default:
+                solPath.setStroke(Color.GREEN);
+                break;
+        }
     }
 }

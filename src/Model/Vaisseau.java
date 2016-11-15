@@ -17,14 +17,14 @@ public class Vaisseau extends Group {
     private int positionX, positionY;
     private Label nom;
 
-    Vaisseau(){
+    public Vaisseau(){
         essence = 1000;
         vitesseX = 0;
         vitesseY = 0;
         rotation = 0;
         positionX = 100;
         positionY = 200;
-        nom = new Label("Player");
+        nom = new Label("");
 
         this.getChildren().addAll(new VBox(nom, generateImageVaisseau()));
     }
@@ -37,58 +37,62 @@ public class Vaisseau extends Group {
         return new Group(triangle, gun1, gun2);
     }
 
-    void reduireEssence(int reduction){
+    public void reduireEssence(int reduction){
         essence -= reduction;
     }
 
-    void rotationGauche(int vitesseRotation){
+    public void rotationGauche(int vitesseRotation){
         rotation -= vitesseRotation;
         if (rotation < 0)
             rotation = 360 + rotation;
     }
 
-    void rotationDroite(int vitesseRotation){
+    public void rotationDroite(int vitesseRotation){
         rotation =+ vitesseRotation;
         if (rotation > 360)
             rotation -= 360;
     }
 
-    void bouger(){
+    private void bouger(){
         positionX += vitesseX;
         positionY += vitesseY;
     }
 
-    void accelerer(boolean appuyer){
+    public void accelerer(boolean appuyer){
         double accelerationX = 0;
         double accelerationY = 0;
         if(appuyer){
             accelerationX = 10 * Math.cos((double)rotation);
             accelerationY = 10 * Math.sin((double)rotation);
+            reduireEssence(10);
         }
         vitesseX += accelerationX;
         vitesseY += accelerationY - 9.8;
+        bouger();
     }
 
-    int getEssence(){
+    public int getEssence(){
         return essence;
     }
 
-    int getX(){
+    public int getX(){
         return positionX;
     }
 
-    int getY(){
+    public int getY(){
         return positionY;
     }
 
-    int getRotation(){
+    public int getRotation(){
         return rotation;
     }
 
-    void setNom(String nouveauNom){
+    public void setNom(String nouveauNom){
         if (nouveauNom.equalsIgnoreCase("vincent")){
             nom.setText("Dieu");
         } else
             nom.setText(nouveauNom);
     }
+
+
 }

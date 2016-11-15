@@ -3,6 +3,7 @@
  */
 package View;
 
+
 import Model.Vaisseau;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -22,7 +23,8 @@ public class SceneJeu {
         this.sol=sol;
 
 
-        Group root=new Group(vaisseau,sol);
+        Group root=new Group();
+        root.getChildren().addAll(vaisseau,sol);
 
         jeu=new Scene(root,1400,700);
     }
