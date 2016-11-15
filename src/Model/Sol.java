@@ -1,5 +1,6 @@
 package Model;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
@@ -67,5 +68,9 @@ public class Sol {
 
     public Vector<Integer> getSolValeurs(){
         return solValeurs;
+    }
+
+    public void setPathColor(Color couleur){
+        solPath.setFill(couleur);
     }
 }
