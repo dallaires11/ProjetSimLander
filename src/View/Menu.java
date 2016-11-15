@@ -18,7 +18,7 @@ public class Menu extends Group{
     private ImageView fond,titre;
     private VBox org;
 
-    public Menu(Stage stage,Choix choix){
+    public Menu(Stage stage,Choix choix,Option classOption){
         fond=new ImageView("Image/cielEtoile.gif");
         titre=new ImageView("Image/Logo.png");
         commencer=new Button("Commencer");
@@ -29,11 +29,13 @@ public class Menu extends Group{
 
         setText();
         setPosition(stage);
-        setAction(stage,choix);
+        setAction(stage,choix,classOption);
 
         root=new Group();
         root.getChildren().addAll(fond,org);
         menu=new Scene(root,1400,700);
+
+        classOption.setSceneMenu(menu);
     }
 
     private void setText(){
@@ -49,14 +51,14 @@ public class Menu extends Group{
         fond.fitWidthProperty().bind(stage.widthProperty());
     }
 
-    private void setAction(Stage stage,Choix choix){
+    private void setAction(Stage stage,Choix choix,Option classOption){
         quitter.setOnAction(event -> {
             stage.close();
         });
-        /*option.setOnAction(event -> {
-            stage.setScene(Option.getSceneOption());
+        option.setOnAction(event -> {
+            stage.setScene(classOption.getSceneOption());
         });
-        */
+
         commencer.setOnAction(event -> {
             stage.setScene(choix.getSceneChoix());
         });

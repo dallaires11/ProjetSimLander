@@ -13,6 +13,7 @@ public class Main extends Application {
     Stage leStage;
     Menu menu;
     Choix choix;
+    Option option;
 
 
 
@@ -21,7 +22,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         leStage=primaryStage;
         choix=new Choix(leStage);
-        menu=new Menu(leStage,choix);
+        option=new Option(leStage);
+        menu=new Menu(leStage,choix,option);
         Group root = new Group();
         //Temps 2 keyframe / timeline
         primaryStage.setTitle("SimLander");
