@@ -4,9 +4,4 @@
 package Controller;
 
 public class ControllerJeu {
-    /*
-    Mettre une timeline separee pour l'essence
-     */
-
-
 }
