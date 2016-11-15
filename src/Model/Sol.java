@@ -1,5 +1,6 @@
 package Model;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
@@ -19,42 +20,57 @@ public class Sol {
     note: mettre path colueur selon planete
      */
 
-    Path solPath;
-    Vector<Integer> solValeurs;
+    private int precision;
+    private Path solPath;
+    private Vector<Integer> solValeurs;
 
 
-    public Sol(int diff){
-        solValeurs = new Vector<>();
+    public Sol(){
+        solValeurs = new Vector<Integer>();
+        precision = 10;
+    }
+
+    public void creerPath(int diff){
+        Vector<Integer> temp = new Vector<>();
         IntStream.iterate(0, i -> i = (int) (Math.random() * 250))
                 .limit(140)
-                .forEach(i->solValeurs.add(i));
+                .forEach(i->temp.add(i));
 
-        solValeurs.stream().mapToInt(i -> (i))
-                .map((i,j) -> {
-                    if (Math.random() * 2 > 1)
-                        i+j;
-                })
+        int plat1 = 700 - (int)(Math.random() * 680);
+        int plat2 = (int) (Math.random() * 680) + 700;
 
         Path ground = new Path();
-        for(int x=0;x<140;x++){
-            if (x==0)
-                ground.getElements().add(new MoveTo(0,700-sol.get(x)));
-            else if(x==debPlat1||x==debPlat2){
-                int h= 700- sol.get(x);
-                ground.getElements().addAll(new LineTo(x*precision,h));
-                x+=diff;
-                ground.getElements().addAll(new LineTo(x*precision,h));
-                for(int z=0;z<diff;z++){
-                    solH.add(h);
+        for(int x = 0; x < 140; x++){
+            if (x == 0)
+                ground.getElements().add(new MoveTo(0, 700 - temp.get(x)));
+            else if(x == plat1 || x == plat2){
+                int h = 700 - temp.get(x);
+                ground.getElements().addAll(new LineTo(x * precision,h));
+
+                x += diff;
+                ground.getElements().addAll(new LineTo(x * precision,h));
+
+                for(int z=0; z<diff ;z++){
+                    solValeurs.add(h);
                 }
             }
             else {
-                ground.getElements().add(new LineTo((x*precision),700-(sol.get(x))));
-                solH.add(700-(sol.get(x)));
+                ground.getElements().add(new LineTo((x * precision), 700 - (temp.get(x))));
+                solValeurs.add(700-(temp.get(x)));
             }
         }
-
-        return ground;
+        solPath = ground;
     }
 
+    public Path getPath(){
+        return solPath;
+    }
+
+    public Vector<Integer> getSolValeurs(){
+        return solValeurs;
+    }
+
+    public void setPathColor(Color couleur){
+        solPath.setFill(couleur);
+    }
 }
