@@ -14,7 +14,7 @@ public class Main extends Application {
     Menu menu;
     Choix choix;
     Option option;
-
+    SceneJeu vueJeu;
 
 
 
@@ -23,6 +23,7 @@ public class Main extends Application {
         leStage=primaryStage;
         choix=new Choix(leStage);
         option=new Option(leStage);
+        vueJeu=new SceneJeu();
         menu=new Menu(leStage,choix,option);
         Group root = new Group();
         //Temps 2 keyframe / timeline
@@ -30,6 +31,10 @@ public class Main extends Application {
         primaryStage.setScene(menu.getSceneMenu());
         primaryStage.show();
     }
+
+
+
+
 
 
     public static void main(String[] args) {
