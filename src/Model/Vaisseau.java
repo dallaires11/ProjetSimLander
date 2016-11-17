@@ -104,11 +104,10 @@ public class Vaisseau extends Group {
         } else
             nom.setText(nouveauNom);
     }
-}
-
 
     private void setPositonForme(){
         org.setAlignment(Pos.CENTER);
     }
+}
 
 

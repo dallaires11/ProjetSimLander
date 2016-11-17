@@ -83,12 +83,14 @@ public class Sol {
                 solPath.setStroke(Color.DARKORANGE);
                 break;
             case 3:
-                solPath.setStroke(Color.LIGHTGRAY);
+                LinearGradient lnGr1=new LinearGradient(0,0,1,1,true, CycleMethod.NO_CYCLE,
+                        new Stop(0,Color.WHITE),new Stop(1,Color.DARKGRAY));
+                solPath.setStroke(lnGr1);
                 break;
             case 4:
-                LinearGradient lnGr=new LinearGradient(0,0,1,1,true, CycleMethod.NO_CYCLE,
-                        new Stop(0,Color.WHITE),new Stop(1,Color.BLACK));
-                solPath.setStroke(lnGr);
+                LinearGradient lnGr2=new LinearGradient(0,0,.5,1,true, CycleMethod.REFLECT,
+                        new Stop(0,Color.FIREBRICK),new Stop(1,Color.AQUAMARINE));
+                solPath.setStroke(lnGr2);
                 break;
             default:
                 solPath.setStroke(Color.GREEN);
