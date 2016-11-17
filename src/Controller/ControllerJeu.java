@@ -6,8 +6,11 @@ package Controller;
 import Model.Sol;
 import Model.Vaisseau;
 import View.SceneJeu;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class ControllerJeu{
     private Timeline gaz,mouvementCollision;
@@ -19,6 +22,8 @@ public class ControllerJeu{
         this.jeu=jeu;
         this.vaisseau=vaisseau;
         this.sol=sol;
+
+        initialisationMouvementCollision();
 
     }
 
@@ -34,6 +39,38 @@ public class ControllerJeu{
 
     public void finJeu(){
         jeu.cleanup();
+    }
+
+    private void initialisationMouvementCollision(){
+        mouvementCollision=new Timeline(new KeyFrame(
+                Duration.millis(15), t->{
+            //vaisseau.accelerer();
+
+        }
+        ));
+        mouvementCollision.setCycleCount(Animation.INDEFINITE);
+        /*
+            vaisseu.accelerer(accelerationJoueur);
+            vesseau.setTranslateY(vesseau.getTranslateY()+vaisseu.getVitesseY());
+            vesseau.setTranslateX(vesseau.getTranslateX()+vaisseu.getVitesseX());
+            vitesse.setText("vitesse :" + vaisseu.getVitesseY());
+            position.setText("Position :" + vesseau.getTranslateY());
+            acY.setText("AccY: "+(vaisseu.getAccelationy()-0.0098));
+            rotation.setText("Rotation:"+vaisseu.getRotation());
+            hauteurVaisseau.setText("VaisseauY: "+(700-(vesseau.getTranslateY()+120)));
+            hauteurSol.setText("Hauteur Sol: "+(700-solH.get(((int)(vesseau.getTranslateX()+650)/precision))));
+            positionXVaisseau.setText("VaisseauX: "+((vesseau.getTranslateX()+650)/precision));
+            if(peutetre())
+                if(conditionvictoire()){
+
+                    win();
+                    primaryStage.close();
+                }
+                else{
+                    loose();
+                    primaryStage.close();
+                }
+        }*/
     }
 
     public void startMouvementCollision(){
