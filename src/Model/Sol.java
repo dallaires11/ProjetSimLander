@@ -50,7 +50,7 @@ public class Sol {
                 int h = 700 - temp.get(x);
                 ground.getElements().addAll(new LineTo(x * precision,h));
 
-                x += diff;
+                x += diff*20;
                 ground.getElements().addAll(new LineTo(x * precision,h));
 
                 for(int z=0; z<diff ;z++){

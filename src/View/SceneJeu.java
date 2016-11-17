@@ -3,28 +3,20 @@
  */
 package View;
 
-
-import Model.Vaisseau;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.scene.shape.Path;
-import javafx.stage.Stage;
 
 public class SceneJeu {
     private Scene jeu;
     private boolean accelerationJoueur;
-    private Vaisseau vaisseau;
-    private Path sol;
+    private Group root;
 
-    public SceneJeu(Vaisseau vaisseau,Path sol){
+    public SceneJeu(){
         accelerationJoueur=false;
-        this.vaisseau=vaisseau;
-        this.sol=sol;
 
-
-        Group root=new Group();
-        root.getChildren().addAll(vaisseau,sol);
+        root=new Group();
 
         jeu=new Scene(root,1400,700);
     }
@@ -43,6 +35,18 @@ public class SceneJeu {
                 accelerationJoueur=false;
 
         });
+    }
+
+    public Scene getSceneJeu(){
+        return jeu;
+    }
+
+    public void addElementJeu(Node node){
+        root.getChildren().add(node);
+    }
+
+    public void cleanup(Node node){
+        root.getChildren().removeAll();
     }
 
 

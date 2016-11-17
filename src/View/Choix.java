@@ -29,8 +29,9 @@ public class Choix {
     private int choixPLanete;
     private int choixDifficulte;
     private Button facile,medium,difficile,pret;
+    private ControllerJeu controller;
 
-    public Choix(Stage stage){
+    public Choix(Stage stage,ControllerJeu controller){
         choixPLanete=1;
         choixDifficulte=1;
 
@@ -78,11 +79,14 @@ public class Choix {
         root= new Group();
         root.getChildren().addAll(fond,easter,org);
 
+        this.controller=controller;
+
         setPosition(stage);
-        setAction();
+        setAction(stage);
         setTexte();
 
         choix=new Scene(root,1400,700);
+
     }
 
     private void  setPosition(Stage stage){
@@ -101,7 +105,7 @@ public class Choix {
         fond.fitWidthProperty().bind(stage.widthProperty());
     }
 
-    private void setAction(){
+    private void setAction(Stage leStage){
         planete1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             ChangeCouleurPresente(choixPLanete);
             choixPLanete=1;
@@ -132,11 +136,9 @@ public class Choix {
             choixDifficulte=3;
         });
         pret.setOnAction(event -> {
-            //jeu.setJeu();
-            /*pop up controle
-            si chaos==true
-            start timeline meteore
-             */
+            controller.setJeu(choixPLanete,choixDifficulte,nomVaisseau.getText(),leStage);
+            //pop up controle
+
         });
 
     }

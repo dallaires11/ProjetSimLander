@@ -26,11 +26,12 @@ public class Main extends Application {
         leStage=primaryStage;
         vaisseau=new Vaisseau();
         sol=new Sol();
-        choix=new Choix(leStage);
+        vueJeu=new SceneJeu();
+        controller=new ControllerJeu(vaisseau,sol,vueJeu);
+        choix=new Choix(leStage,controller);
         option=new Option(leStage);
         //vueJeu=new SceneJeu(vaisseau,sol.getPath());
         menu=new Menu(leStage,choix,option);
-        controller=new ControllerJeu();
         Group root = new Group();
         primaryStage.setTitle("SimLander");
         primaryStage.setScene(menu.getSceneMenu());
