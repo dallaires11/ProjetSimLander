@@ -25,8 +25,7 @@ public class ControllerJeu{
     public void setJeu(int planete, int diff,String nom,Stage stage){
         sol.genererPath(diff,planete);
         vaisseau.setNom(nom);
-        jeu.addElementJeu(sol.getPath());
-        jeu.addElementJeu(vaisseau);
+        jeu.addElementJeu(vaisseau,sol.getPath());
         //points.startPoint();
         //startMouvementCollision();
         stage.setScene(jeu.getSceneJeu());
@@ -34,7 +33,7 @@ public class ControllerJeu{
     }
 
     public void finJeu(){
-
+        jeu.cleanup();
     }
 
     public void startMouvementCollision(){

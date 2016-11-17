@@ -3,6 +3,7 @@
  */
 package Model;
 
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -16,6 +17,7 @@ public class Vaisseau extends Group {
     private int rotation;
     private int positionX, positionY;
     private Label nom;
+    VBox org;
 
     public Vaisseau() {
         essence = 1000;
@@ -26,7 +28,12 @@ public class Vaisseau extends Group {
         positionY = 200;
         nom = new Label("");
 
-        this.getChildren().addAll(new VBox(nom, generateImageVaisseau()));
+        org=new VBox();
+        org.getChildren().addAll(nom, generateImageVaisseau());
+
+        setPositonForme();
+
+        this.getChildren().add(org);
     }
 
     private Group generateImageVaisseau() {
@@ -99,5 +106,9 @@ public class Vaisseau extends Group {
     }
 }
 
+
+    private void setPositonForme(){
+        org.setAlignment(Pos.CENTER);
+    }
 
 

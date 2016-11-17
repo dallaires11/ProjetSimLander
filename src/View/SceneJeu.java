@@ -3,20 +3,33 @@
  */
 package View;
 
+import Model.Vaisseau;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.shape.Path;
+import javafx.stage.Stage;
 
 public class SceneJeu {
     private Scene jeu;
     private boolean accelerationJoueur;
     private Group root;
+    private Vaisseau vaisseau;
+    private Path sol;
+    private ImageView fond;
 
-    public SceneJeu(){
+    public SceneJeu(Stage stage){
         accelerationJoueur=false;
+        vaisseau=null;
+        sol=null;
+        fond=new ImageView("Image/fondJeu.jpg");
+
+        setPosition(stage);
 
         root=new Group();
+        root.getChildren().add(fond);
 
         jeu=new Scene(root,1400,700);
     }
@@ -41,12 +54,27 @@ public class SceneJeu {
         return jeu;
     }
 
-    public void addElementJeu(Node node){
-        root.getChildren().add(node);
+    public void addElementJeu(Vaisseau vaisseau,Path sol){
+        this.vaisseau=vaisseau;
+        this.sol=sol;
+        setPositionInitial();
+        root.getChildren().addAll(this.vaisseau,this.sol);
     }
 
-    public void cleanup(Node node){
-        root.getChildren().removeAll();
+    public void cleanup(){
+        root.getChildren().removeAll(vaisseau,sol);
+        vaisseau=null;
+        sol=null;
+    }
+
+    private void setPosition(Stage stage){
+        fond.fitHeightProperty().bind(stage.heightProperty());
+        fond.fitWidthProperty().bind(stage.widthProperty());
+    }
+
+    private void setPositionInitial(){
+        vaisseau.setTranslateX(690);
+        vaisseau.setTranslateY(80);
     }
 
 

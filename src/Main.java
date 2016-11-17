@@ -26,7 +26,7 @@ public class Main extends Application {
         leStage=primaryStage;
         vaisseau=new Vaisseau();
         sol=new Sol();
-        vueJeu=new SceneJeu();
+        vueJeu=new SceneJeu(leStage);
         controller=new ControllerJeu(vaisseau,sol,vueJeu);
         choix=new Choix(leStage,controller);
         option=new Option(leStage);
