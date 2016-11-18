@@ -24,12 +24,12 @@ public class SceneJeu {
         accelerationJoueur=false;
         vaisseau=null;
         sol=null;
-        fond=new ImageView("Image/fondJeu.jpg");
+        //fond=new ImageView("Image/fondJeu.jpg");
 
         setPosition(stage);
 
         root=new Group();
-        root.getChildren().add(fond);
+        //root.getChildren().add(fond);
 
         jeu=new Scene(root,1400,700);
     }
@@ -39,9 +39,9 @@ public class SceneJeu {
             if(event.getCode()== KeyCode.UP)
                 accelerationJoueur=true;
             if(event.getCode()== KeyCode.LEFT)
-                return;
+                vaisseau.rotationGauche(10);
             if(event.getCode()== KeyCode.RIGHT)
-                return;
+                vaisseau.rotationDroite(10);
         });
         jeu.setOnKeyReleased(event -> {
             if(event.getCode()== KeyCode.UP)
@@ -68,19 +68,22 @@ public class SceneJeu {
     }
 
     private void setPosition(Stage stage){
-        fond.fitHeightProperty().bind(stage.heightProperty());
-        fond.fitWidthProperty().bind(stage.widthProperty());
+        //fond.fitHeightProperty().bind(stage.heightProperty());
+        //fond.fitWidthProperty().bind(stage.widthProperty());
     }
 
     private void setPositionInitial(){
         vaisseau.setTranslateX(690);
         vaisseau.setTranslateY(80);
+        vaisseau.setPosInitial(690,80);
     }
 
+    public boolean appuyerGaz(){
+        return accelerationJoueur;
+    }
 
-
-
-
-
-
+    public void deplacement(int x,int y){
+        vaisseau.setTranslateX(x);
+        vaisseau.setTranslateY(y);
+    }
 }

@@ -35,6 +35,8 @@ public class ControllerJeu{
         //startMouvementCollision();
         stage.setScene(jeu.getSceneJeu());
 
+        startMouvementCollision();
+
     }
 
     public void finJeu(){
@@ -44,8 +46,8 @@ public class ControllerJeu{
     private void initialisationMouvementCollision(){
         mouvementCollision=new Timeline(new KeyFrame(
                 Duration.millis(15), t->{
-            //vaisseau.accelerer();
-
+            vaisseau.accelerer(jeu.appuyerGaz());
+            jeu.deplacement(vaisseau.getX(),vaisseau.getY());
         }
         ));
         mouvementCollision.setCycleCount(Animation.INDEFINITE);

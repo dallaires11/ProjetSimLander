@@ -17,7 +17,8 @@ public class Vaisseau extends Group {
     private int rotation;
     private int positionX, positionY;
     private Label nom;
-    VBox org;
+    private VBox org;
+    private Group ensembleForme;
 
     public Vaisseau() {
         essence = 1000;
@@ -28,8 +29,10 @@ public class Vaisseau extends Group {
         positionY = 200;
         nom = new Label("");
 
+        ensembleForme=generateImageVaisseau();
+
         org=new VBox();
-        org.getChildren().addAll(nom, generateImageVaisseau());
+        org.getChildren().addAll(nom,ensembleForme);
 
         setPositonForme();
 
@@ -69,16 +72,15 @@ public class Vaisseau extends Group {
         double accelerationX = 0;
         double accelerationY = 0;
         if (appuyer) {
-
             accelerationX = 10 * Math.cos((double) rotation);
             accelerationY = 10 * Math.sin((double) rotation);
             reduireEssence(10);
         }
         vitesseX += accelerationX;
-        vitesseY += accelerationY - 9.8;
+        vitesseY += accelerationY - 0.000098;
         bouger();
-        accelerationX = 6 * Math.cos((double) rotation);
-        accelerationY = 6 * Math.sin((double) rotation);
+        //accelerationX = 6 * Math.cos((double) rotation);
+        //accelerationY = 6 * Math.sin((double) rotation);
     }
 
 
@@ -92,6 +94,11 @@ public class Vaisseau extends Group {
 
     public int getY(){
         return positionY;
+    }
+
+    public void setPosInitial(int x,int y){
+        positionX=x;
+        positionY=y;
     }
 
     public int getRotation(){
