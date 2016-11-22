@@ -37,10 +37,10 @@ public class SceneJeu {
             if(event.getCode()== KeyCode.UP)
                 accelerationJoueur=true;
             if(event.getCode()== KeyCode.LEFT) {
-                vaisseau.rotationGauche(10);
+                vaisseau.rotationGauche(5);
             }
             if(event.getCode()== KeyCode.RIGHT) {
-                vaisseau.rotationDroite(10);
+                vaisseau.rotationDroite(5);
             }
         });
         jeu.setOnKeyReleased(event -> {

@@ -13,9 +13,9 @@ import javafx.scene.shape.Rectangle;
 public class Vaisseau extends Group {
 
     private int essence;
-    private double vitesseX, vitesseY;
+    private float vitesseX, vitesseY;
     private int rotation;
-    private int positionX, positionY;
+    private float positionX, positionY;
     private Label nom;
     private VBox org;
     private Group ensembleForme;
@@ -66,18 +66,28 @@ public class Vaisseau extends Group {
     private void bouger() {
         positionX += vitesseX;
         positionY -= vitesseY;
+
+        if(positionX <= 0){
+            positionX = 1400;
+        }
+        if(positionX >= 1400){
+            positionX = 0;
+        }
+
+        this.setTranslateX(positionX);
+        this.setTranslateY(positionY);
     }
 
     public void accelerer(boolean appuyer) {
-        double accelerationX = 0;
-        double accelerationY = 0;
+        float accelerationX = 0;
+        float accelerationY = 0;
         if (appuyer) {
-            accelerationX = 10 * Math.cos((double) rotation);
-            accelerationY = 10 * Math.sin((double) rotation);
+            accelerationX =(float) (0.7 * Math.sin(rotation));
+            accelerationY =(float) (0.7 * Math.cos(rotation));
             reduireEssence(10);
         }
         vitesseX += accelerationX;
-        vitesseY += accelerationY - 0.000098;
+        vitesseY += accelerationY - 0.049;
         bouger();
     }
 
@@ -85,11 +95,11 @@ public class Vaisseau extends Group {
         return essence;
     }
 
-    public int getX(){
+    public float getX(){
         return positionX;
     }
 
-    public int getY(){
+    public float getY(){
         return positionY;
     }
 
@@ -113,7 +123,7 @@ public class Vaisseau extends Group {
         org.setAlignment(Pos.CENTER);
     }
 
-    public int getPositionX(){
+    public float getPositionX(){
         return positionX;
     }
 
