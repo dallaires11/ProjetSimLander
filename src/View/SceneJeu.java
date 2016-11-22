@@ -83,7 +83,7 @@ public class SceneJeu {
         return accelerationJoueur;
     }
 
-    public void deplacement(int x,int y){
+    public void deplacement(double x,double y){
         vaisseau.setTranslateX(x);
         vaisseau.setTranslateY(y);
     }
