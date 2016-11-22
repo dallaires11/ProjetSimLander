@@ -71,9 +71,10 @@ public class Vaisseau extends Group {
     public void accelerer(boolean appuyer) {
         double accelerationX = 0;
         double accelerationY = 0;
+        double radian=Math.toRadians(rotation);
         if (appuyer) {
-            accelerationX = 0.1 * Math.cos((double) rotation);
-            accelerationY =0.1 * Math.sin((double) rotation);
+            accelerationX = 0.05 * Math.cos(radian);
+            accelerationY =0.05 * Math.sin(radian);
             reduireEssence(10);
         }
         vitesseX += accelerationX;
