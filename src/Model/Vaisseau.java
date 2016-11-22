@@ -65,7 +65,7 @@ public class Vaisseau extends Group {
 
     private void bouger() {
         positionX += vitesseX;
-        positionY += vitesseY;
+        positionY -= vitesseY;
     }
 
     public void accelerer(boolean appuyer) {

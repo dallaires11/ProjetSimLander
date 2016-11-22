@@ -27,6 +27,7 @@ public class SceneJeu {
         //fond=new ImageView("Image/fondJeu.jpg");
 
         setPosition(stage);
+        setAction();
 
         root=new Group();
         //root.getChildren().add(fond);
