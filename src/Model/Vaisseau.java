@@ -73,15 +73,16 @@ public class Vaisseau extends Group {
     }
 
     public void accelerer(boolean appuyer) {
-        float accelerationX = 0;
-        float accelerationY = 0;
+        double accelerationX = 0;
+        double accelerationY = 0;
+        double radian=Math.toRadians(rotation);
         if (appuyer) {
-            accelerationX =(float) (0.3 * Math.sin(rotation));
-            accelerationY =(float) (0.3 * Math.cos(rotation));
+            accelerationX =(float) (0.025 * Math.cos(radian));
+            accelerationY =(float) (0.025 * Math.sin(radian));
             reduireEssence(10);
         }
         vitesseX += accelerationX;
-        vitesseY += accelerationY - 0.02;
+        vitesseY += accelerationY - 0.0098;
 
         bouger();
     }
