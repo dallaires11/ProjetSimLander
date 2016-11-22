@@ -8,8 +8,7 @@ import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.Color;
 
 public class Vaisseau extends Group {
 
@@ -83,8 +82,8 @@ public class Vaisseau extends Group {
         double accelerationY = 0;
         double radian=Math.toRadians(rotation);
         if (appuyer) {
-            accelerationX =(float) (0.025 * Math.cos(radian));
-            accelerationY =(float) (0.025 * Math.sin(radian));
+            accelerationX =(float) (0.035 * Math.cos(radian));
+            accelerationY =(float) (0.035 * Math.sin(radian));
             reduireEssence(10);
         }
         vitesseX += accelerationX;
@@ -119,6 +118,7 @@ public class Vaisseau extends Group {
             nom.setText("Dieu");
         } else
             nom.setText(nouveauNom);
+        nom.setTextFill(Color.WHITE);
     }
 
     private void setPositonForme(){

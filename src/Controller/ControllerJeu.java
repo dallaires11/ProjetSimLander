@@ -24,7 +24,6 @@ public class ControllerJeu{
         this.sol=sol;
 
         initialisationMouvementCollision();
-
     }
 
     public void setJeu(int planete, int diff,String nom,Stage stage){
@@ -49,20 +48,12 @@ public class ControllerJeu{
             vaisseau.accelerer(jeu.appuyerGaz());
             jeu.deplacement(vaisseau.getTranslateX()+vaisseau.getVitesseX(),
                     vaisseau.getTranslateY()-vaisseau.getVitesseY());
+
+            collision();
         }
         ));
         mouvementCollision.setCycleCount(Animation.INDEFINITE);
         /*
-            vaisseu.accelerer(accelerationJoueur);
-            vesseau.setTranslateY(vesseau.getTranslateY()+vaisseu.getVitesseY());
-            vesseau.setTranslateX(vesseau.getTranslateX()+vaisseu.getVitesseX());
-            vitesse.setText("vitesse :" + vaisseu.getVitesseY());
-            position.setText("Position :" + vesseau.getTranslateY());
-            acY.setText("AccY: "+(vaisseu.getAccelationy()-0.0098));
-            rotation.setText("Rotation:"+vaisseu.getRotation());
-            hauteurVaisseau.setText("VaisseauY: "+(700-(vesseau.getTranslateY()+120)));
-            hauteurSol.setText("Hauteur Sol: "+(700-solH.get(((int)(vesseau.getTranslateX()+650)/precision))));
-            positionXVaisseau.setText("VaisseauX: "+((vesseau.getTranslateX()+650)/precision));
             if(peutetre())
                 if(conditionvictoire()){
 
@@ -79,7 +70,32 @@ public class ControllerJeu{
     public void startMouvementCollision(){
         mouvementCollision.play();
     }
+
     public void stopMouvmentCollision(){
         mouvementCollision.stop();
+    }
+
+    private  void gagner(){
+        stopMouvmentCollision();
+        finJeu();
+        //Stage.setScene(Perdre);
+    }
+
+    private void perdre(){
+        stopMouvmentCollision();
+        finJeu();
+        //Stage.setScene(perdre);
+    }
+
+    private boolean conditionVictoire(){
+        return true;
+    }
+
+    private void collision() {
+        //if Collision{
+        //if Condition victoire==true
+        //else ConditionVictoire==false
+        //}
+        return;
     }
 }

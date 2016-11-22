@@ -24,12 +24,12 @@ public class SceneJeu {
         accelerationJoueur=false;
         vaisseau=null;
         sol=null;
-        //fond=new ImageView("Image/fondJeu.jpg");
+        fond=new ImageView("Image/fondJeu.jpg");
 
         setPosition(stage);
 
         root=new Group();
-        //root.getChildren().add(fond);
+        root.getChildren().add(fond);
 
         jeu=new Scene(root,1400,700);
 
