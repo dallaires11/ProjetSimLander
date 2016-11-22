@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Menu extends Group{
-    private Scene menu;
+    private static Scene menu;
     private Group root;
     private Button commencer,option,quitter;
     private ImageView fond,titre;
@@ -65,7 +65,7 @@ public class Menu extends Group{
 
     }
 
-    public Scene getSceneMenu(){
+    public static Scene getSceneMenu(){
         return  menu;
     }
     /*
