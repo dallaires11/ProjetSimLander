@@ -66,8 +66,6 @@ public class Vaisseau extends Group {
     private void bouger() {
         positionX += vitesseX;
         positionY -= vitesseY;
-        this.setLayoutX(positionX);
-        this.setLayoutY(positionY);
     }
 
     public void accelerer(boolean appuyer) {
@@ -119,7 +117,7 @@ public class Vaisseau extends Group {
         return positionX;
     }
 
-    public int getPositionY(){
+    public double getPositionY(){
         return positionY;
     }
 }
