@@ -115,6 +115,14 @@ public class Vaisseau extends Group {
     private void setPositonForme(){
         org.setAlignment(Pos.CENTER);
     }
+
+    public int getPositionX(){
+        return positionX;
+    }
+
+    public int getPositionY(){
+        return positionY;
+    }
 }
 
 

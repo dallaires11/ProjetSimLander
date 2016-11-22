@@ -27,15 +27,12 @@ public class SceneJeu {
         //fond=new ImageView("Image/fondJeu.jpg");
 
         setPosition(stage);
-        setAction();
 
         root=new Group();
         //root.getChildren().add(fond);
 
         jeu=new Scene(root,1400,700);
-    }
 
-    private void setAction(){
         jeu.setOnKeyPressed(event -> {
             if(event.getCode()== KeyCode.UP)
                 accelerationJoueur=true;
@@ -50,6 +47,7 @@ public class SceneJeu {
 
         });
     }
+
 
     public Scene getSceneJeu(){
         return jeu;

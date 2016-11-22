@@ -48,6 +48,7 @@ public class ControllerJeu{
                 Duration.millis(15), t->{
             vaisseau.accelerer(jeu.appuyerGaz());
             jeu.deplacement(vaisseau.getX(),vaisseau.getY());
+            System.out.println("eille");
         }
         ));
         mouvementCollision.setCycleCount(Animation.INDEFINITE);
