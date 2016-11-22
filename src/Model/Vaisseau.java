@@ -24,7 +24,7 @@ public class Vaisseau extends Group {
         essence = 1000;
         vitesseX = 0;
         vitesseY = 0;
-        rotation = 0;
+        rotation = 90;
         positionX = 0;
         positionY = 0;
         nom = new Label("");
@@ -79,6 +79,7 @@ public class Vaisseau extends Group {
     }
 
     public void accelerer(boolean appuyer) {
+<<<<<<< HEAD
         float accelerationX = 0;
         float accelerationY = 0;
         if (appuyer) {
@@ -88,6 +89,18 @@ public class Vaisseau extends Group {
         }
         vitesseX += accelerationX;
         vitesseY += accelerationY - 0.049;
+=======
+        double accelerationX = 0;
+        double accelerationY = 0;
+        double radian=Math.toRadians(rotation);
+        if (appuyer) {
+            accelerationX = 0.05 * Math.cos(radian);
+            accelerationY =0.05 * Math.sin(radian);
+            reduireEssence(10);
+        }
+        vitesseX += accelerationX;
+        vitesseY += accelerationY - 0.0098;
+>>>>>>> 232def4e0d92a94caed70c7603a3d4f3797c5e02
         bouger();
     }
 
@@ -123,13 +136,20 @@ public class Vaisseau extends Group {
         org.setAlignment(Pos.CENTER);
     }
 
+<<<<<<< HEAD
     public float getPositionX(){
         return positionX;
+=======
+    public double getVitesseX(){
+        return vitesseX;
+>>>>>>> 232def4e0d92a94caed70c7603a3d4f3797c5e02
     }
 
-    public double getPositionY(){
-        return positionY;
+    public double getVitesseY(){
+        return vitesseY;
     }
+
+
 }
 
 

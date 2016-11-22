@@ -47,7 +47,8 @@ public class ControllerJeu{
         mouvementCollision=new Timeline(new KeyFrame(
                 Duration.millis(15), t->{
             vaisseau.accelerer(jeu.appuyerGaz());
-            System.out.println(vaisseau.getPositionY());
+            jeu.deplacement(vaisseau.getTranslateX()+vaisseau.getVitesseX(),
+                    vaisseau.getTranslateY()-vaisseau.getVitesseY());
         }
         ));
         mouvementCollision.setCycleCount(Animation.INDEFINITE);
