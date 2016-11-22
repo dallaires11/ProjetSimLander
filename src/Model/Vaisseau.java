@@ -6,6 +6,7 @@ package Model;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -18,7 +19,7 @@ public class Vaisseau extends Group {
     private int positionX, positionY;
     private Label nom;
     private VBox org;
-    private Group ensembleForme;
+    private ImageView structure;
 
     public Vaisseau() {
         essence = 1000;
@@ -29,23 +30,16 @@ public class Vaisseau extends Group {
         positionY = 0;
         nom = new Label("");
 
-        ensembleForme=generateImageVaisseau();
+        structure= new ImageView("Image/Spaceship.png");
 
         org=new VBox();
-        org.getChildren().addAll(nom,ensembleForme);
+        org.getChildren().addAll(nom,structure);
 
         setPositonForme();
 
         this.getChildren().add(org);
     }
 
-    private Group generateImageVaisseau() {
-        Polygon triangle = new Polygon(0, 20, 10, 0, 20, 20);
-        Rectangle gun1 = new Rectangle(5, 15, 2, -15);
-        Rectangle gun2 = new Rectangle(15, 15, 2, -15);
-
-        return new Group(triangle, gun1, gun2);
-    }
 
     public void reduireEssence(int reduction) {
         essence -= reduction;
