@@ -16,7 +16,7 @@ public class Vaisseau extends Group {
     private int essence;
     private double vitesseX, vitesseY;
     private int rotation;
-    private int positionX, positionY;
+    private double positionX, positionY;
     private Label nom;
     private VBox org;
     private ImageView structure;
@@ -60,19 +60,29 @@ public class Vaisseau extends Group {
     private void bouger() {
         positionX += vitesseX;
         positionY -= vitesseY;
+
+        if(positionX <= 0){
+            positionX = 1400;
+        }
+        if(positionX >= 1400){
+            positionX = 0;
+        }
+
+        this.setTranslateX(positionX);
+        this.setTranslateY(positionY);
     }
 
     public void accelerer(boolean appuyer) {
-        double accelerationX = 0;
-        double accelerationY = 0;
-        double radian=Math.toRadians(rotation);
+        float accelerationX = 0;
+        float accelerationY = 0;
         if (appuyer) {
-            accelerationX = 0.05 * Math.cos(radian);
-            accelerationY =0.05 * Math.sin(radian);
+            accelerationX =(float) (0.3 * Math.sin(rotation));
+            accelerationY =(float) (0.3 * Math.cos(rotation));
             reduireEssence(10);
         }
         vitesseX += accelerationX;
-        vitesseY += accelerationY - 0.0098;
+        vitesseY += accelerationY - 0.02;
+
         bouger();
     }
 
@@ -80,11 +90,11 @@ public class Vaisseau extends Group {
         return essence;
     }
 
-    public int getX(){
+    public double getX(){
         return positionX;
     }
 
-    public int getY(){
+    public double getY(){
         return positionY;
     }
 
@@ -110,6 +120,7 @@ public class Vaisseau extends Group {
 
     public double getVitesseX(){
         return vitesseX;
+
     }
 
     public double getVitesseY(){
