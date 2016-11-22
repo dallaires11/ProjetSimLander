@@ -13,9 +13,9 @@ import javafx.scene.shape.Rectangle;
 public class Vaisseau extends Group {
 
     private int essence;
-    private float vitesseX, vitesseY;
+    private double vitesseX, vitesseY;
     private int rotation;
-    private float positionX, positionY;
+    private double positionX, positionY;
     private Label nom;
     private VBox org;
     private Group ensembleForme;
@@ -79,28 +79,16 @@ public class Vaisseau extends Group {
     }
 
     public void accelerer(boolean appuyer) {
-<<<<<<< HEAD
         float accelerationX = 0;
         float accelerationY = 0;
         if (appuyer) {
-            accelerationX =(float) (0.7 * Math.sin(rotation));
-            accelerationY =(float) (0.7 * Math.cos(rotation));
+            accelerationX =(float) (0.3 * Math.sin(rotation));
+            accelerationY =(float) (0.3 * Math.cos(rotation));
             reduireEssence(10);
         }
         vitesseX += accelerationX;
-        vitesseY += accelerationY - 0.049;
-=======
-        double accelerationX = 0;
-        double accelerationY = 0;
-        double radian=Math.toRadians(rotation);
-        if (appuyer) {
-            accelerationX = 0.05 * Math.cos(radian);
-            accelerationY =0.05 * Math.sin(radian);
-            reduireEssence(10);
-        }
-        vitesseX += accelerationX;
-        vitesseY += accelerationY - 0.0098;
->>>>>>> 232def4e0d92a94caed70c7603a3d4f3797c5e02
+        vitesseY += accelerationY - 0.02;
+
         bouger();
     }
 
@@ -108,11 +96,11 @@ public class Vaisseau extends Group {
         return essence;
     }
 
-    public float getX(){
+    public double getX(){
         return positionX;
     }
 
-    public float getY(){
+    public double getY(){
         return positionY;
     }
 
@@ -136,13 +124,9 @@ public class Vaisseau extends Group {
         org.setAlignment(Pos.CENTER);
     }
 
-<<<<<<< HEAD
-    public float getPositionX(){
-        return positionX;
-=======
     public double getVitesseX(){
         return vitesseX;
->>>>>>> 232def4e0d92a94caed70c7603a3d4f3797c5e02
+
     }
 
     public double getVitesseY(){
