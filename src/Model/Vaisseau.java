@@ -25,8 +25,8 @@ public class Vaisseau extends Group {
         vitesseX = 0;
         vitesseY = 0;
         rotation = 0;
-        positionX = 100;
-        positionY = 200;
+        positionX = 690;
+        positionY = 80;
         nom = new Label("");
 
         ensembleForme=generateImageVaisseau();
@@ -66,6 +66,8 @@ public class Vaisseau extends Group {
     private void bouger() {
         positionX += vitesseX;
         positionY -= vitesseY;
+        this.setLayoutX(positionX);
+        this.setLayoutY(positionY);
     }
 
     public void accelerer(boolean appuyer) {

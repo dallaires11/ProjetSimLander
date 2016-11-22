@@ -24,22 +24,24 @@ public class SceneJeu {
         accelerationJoueur=false;
         vaisseau=null;
         sol=null;
-        //fond=new ImageView("Image/fondJeu.jpg");
+        fond=new ImageView("Image/fondJeu.jpg");
 
         setPosition(stage);
 
         root=new Group();
-        //root.getChildren().add(fond);
+        root.getChildren().add(fond);
 
         jeu=new Scene(root,1400,700);
 
         jeu.setOnKeyPressed(event -> {
             if(event.getCode()== KeyCode.UP)
                 accelerationJoueur=true;
-            if(event.getCode()== KeyCode.LEFT)
+            if(event.getCode()== KeyCode.LEFT) {
                 vaisseau.rotationGauche(10);
-            if(event.getCode()== KeyCode.RIGHT)
+            }
+            if(event.getCode()== KeyCode.RIGHT) {
                 vaisseau.rotationDroite(10);
+            }
         });
         jeu.setOnKeyReleased(event -> {
             if(event.getCode()== KeyCode.UP)
