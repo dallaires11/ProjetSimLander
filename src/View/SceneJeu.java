@@ -86,5 +86,6 @@ public class SceneJeu {
     public void deplacement(double x,double y){
         vaisseau.setTranslateX(x);
         vaisseau.setTranslateY(y);
+        vaisseau.setRotate(vaisseau.getRotation());
     }
 }
