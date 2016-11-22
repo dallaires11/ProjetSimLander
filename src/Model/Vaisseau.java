@@ -31,6 +31,8 @@ public class Vaisseau extends Group {
         nom = new Label("");
 
         structure= new ImageView("Image/Spaceship.png");
+        structure.setFitHeight(20);
+        structure.setFitWidth(20);
 
         org=new VBox();
         org.getChildren().addAll(nom,structure);
@@ -42,34 +44,38 @@ public class Vaisseau extends Group {
 
 
     public void reduireEssence(int reduction) {
-        essence -= reduction;
+        essence += reduction;
     }
 
     public void rotationGauche(int vitesseRotation) {
-        rotation -= vitesseRotation;
+        rotation += vitesseRotation;
         if (rotation < 0)
             rotation = 360 + rotation;
+
+        structure.setRotate(90-rotation);
     }
 
     public void rotationDroite(int vitesseRotation) {
-        rotation = +vitesseRotation;
+        rotation -= vitesseRotation;
         if (rotation > 360)
             rotation -= 360;
+
+        structure.setRotate(90-rotation);
     }
 
     private void bouger() {
         positionX += vitesseX;
         positionY -= vitesseY;
 
-        if(positionX <= 0){
+        if(positionX <= -20){
             positionX = 1400;
+            this.setTranslateX(positionX);
         }
-        if(positionX >= 1400){
+        if(positionX >= 1420){
             positionX = 0;
+            this.setTranslateX(positionX);
         }
 
-        this.setTranslateX(positionX);
-        this.setTranslateY(positionY);
     }
 
     public void accelerer(boolean appuyer) {
@@ -117,6 +123,7 @@ public class Vaisseau extends Group {
 
     private void setPositonForme(){
         org.setAlignment(Pos.CENTER);
+
     }
 
     public double getVitesseX(){
