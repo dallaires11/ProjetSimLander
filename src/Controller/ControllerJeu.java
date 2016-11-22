@@ -47,7 +47,7 @@ public class ControllerJeu{
         mouvementCollision=new Timeline(new KeyFrame(
                 Duration.millis(15), t->{
             vaisseau.accelerer(jeu.appuyerGaz());
-            //jeu.deplacement((int)vaisseau.getTranslateX(),(int)vaisseau.getTranslateY());
+            jeu.deplacement(vaisseau.getX(),vaisseau.getY());
             System.out.println("eille");
         }
         ));
