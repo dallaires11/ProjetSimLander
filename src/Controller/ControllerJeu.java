@@ -54,7 +54,7 @@ public class ControllerJeu{
             jeu.deplacement(vaisseau.getTranslateX()+vaisseau.getVitesseX(),
                     vaisseau.getTranslateY()-vaisseau.getVitesseY());
 
-            collision();
+            //collision();
         }
         ));
         mouvementCollision.setCycleCount(Animation.INDEFINITE);
@@ -88,7 +88,7 @@ public class ControllerJeu{
     }
 
     private void collision() {
-        if (1==1){
+        if (1==2){
             finJeu();
             conditionVictoire();
         }

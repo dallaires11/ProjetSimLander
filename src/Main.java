@@ -8,16 +8,17 @@ import javafx.stage.Stage;
 import View.*;
 
 public class Main extends Application {
-    Points points;
-    Stage leStage;
-    Menu menu;
-    Choix choix;
-    Option option;
-    SceneJeu vueJeu;
-    Vaisseau vaisseau;
-    Sol sol;
-    Path solCourant;
-    ControllerJeu controller;
+    private Points points;
+    private Stage leStage;
+    private Menu menu;
+    private Choix choix;
+    private Option option;
+    private SceneJeu vueJeu;
+    private Vaisseau vaisseau;
+    private Sol sol;
+    private ControllerJeu controller;
+    private Perdre perdre;
+    private Gagner gagner;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -25,10 +26,12 @@ public class Main extends Application {
         vaisseau=new Vaisseau();
         sol=new Sol();
         vueJeu=new SceneJeu(leStage);
+        perdre=new Perdre(leStage);
+        gagner=new Gagner(leStage);
+        controller=new ControllerJeu(vaisseau,sol,vueJeu,leStage,perdre.getScene(), gagner.getScene());
         choix=new Choix(leStage,controller);
         option=new Option(leStage);
         menu=new Menu(leStage,choix,option);
-        controller=new ControllerJeu(vaisseau,sol,vueJeu,leStage,Perdre.getScene(), Gagner.getScene());
         primaryStage.setTitle("SimLander");
         primaryStage.setScene(menu.getSceneMenu());
         primaryStage.show();
