@@ -14,11 +14,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 public class Choix {
+    private MediaPlayer illu;
     private Scene choix;
     private Group root;
     private VBox org,optionVaisseau,ensPlan1,ensPlan2,ensPlan3,ensPlan4;
@@ -32,6 +37,8 @@ public class Choix {
     private ControllerJeu controller;
 
     public Choix(Stage stage,ControllerJeu controller){
+        illu=new MediaPlayer(new Media(new File("src/Sound/XFiles.mp3").toURI().toString()));
+
         choixPLanete=1;
         choixDifficulte=1;
 
@@ -77,7 +84,7 @@ public class Choix {
         org.getChildren().addAll(planete,difficulte,optionVaisseau,pret);
 
         root= new Group();
-        root.getChildren().addAll(fond,easter,org);
+        root.getChildren().addAll(fond,org,easter);
 
         this.controller=controller;
 
@@ -126,20 +133,20 @@ public class Choix {
             choixPLanete=4;
             kaurava.setStroke(Color.GREEN);
         });
-        facile.setOnAction(event -> {
-            choixDifficulte=1;
-        });
-        medium.setOnAction(event -> {
-            choixDifficulte=2;
-        });
-        difficile.setOnAction(event -> {
-            choixDifficulte=3;
-        });
+        facile.setOnAction(event -> choixDifficulte=1);
+        medium.setOnAction(event -> choixDifficulte=2);
+        difficile.setOnAction(event -> choixDifficulte=3);
         pret.setOnAction(event -> {
             controller.setJeu(choixPLanete,choixDifficulte,nomVaisseau.getText());
             //pop up controle
-
         });
+
+        easter.setOnMouseEntered(event -> {
+            illu.play();
+            System.out.println("joeur");
+        });
+
+        easter.setOnMouseExited(event -> illu.stop());
 
     }
 
