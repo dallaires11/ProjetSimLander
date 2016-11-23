@@ -3,17 +3,13 @@
  */
 package View;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.*;
-import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
-import java.io.File;
 
 public class Perdre {
     static Scene perdre;
@@ -39,12 +35,7 @@ public class Perdre {
         lol.setScaleX(1.2); lol.setScaleY(1.2);
 
         Button toMenu = new Button("I suck, take me back home");
-        toMenu.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ceStage.setScene(Menu.getSceneMenu());
-            }
-        });
+        toMenu.setOnAction(event -> ceStage.setScene(Menu.getSceneMenu()));
 
 
         groupe = new Group(background, texte, lol, toMenu);
@@ -58,9 +49,5 @@ public class Perdre {
 
     public static Scene getScene(){
         return perdre;
-    }
-
-    public Group getGroup(){
-        return groupe;
     }
 }

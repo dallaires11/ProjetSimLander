@@ -9,6 +9,7 @@ import View.SceneJeu;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -17,28 +18,32 @@ public class ControllerJeu{
     private Vaisseau vaisseau;
     private Sol sol;
     private SceneJeu jeu;
+    private Scene perdu,gagne;
+    private Stage stage;
 
-    public ControllerJeu(Vaisseau vaisseau, Sol sol, SceneJeu jeu){
+    public ControllerJeu(Vaisseau vaisseau, Sol sol, SceneJeu jeu,Stage leStage, Scene perdu, Scene gagne){
         this.jeu=jeu;
         this.vaisseau=vaisseau;
         this.sol=sol;
+        stage=leStage;
+        this.perdu=perdu;
+        this.gagne=gagne;
 
         initialisationMouvementCollision();
     }
 
-    public void setJeu(int planete, int diff,String nom,Stage stage){
+    public void setJeu(int planete, int diff, String nom){
         sol.genererPath(diff,planete);
         vaisseau.setNom(nom);
         jeu.addElementJeu(vaisseau,sol.getPath());
         //points.startPoint();
-        //startMouvementCollision();
         stage.setScene(jeu.getSceneJeu());
 
         startMouvementCollision();
 
     }
 
-    public void finJeu(){
+    private void finJeu(){
         jeu.cleanup();
     }
 
@@ -53,49 +58,39 @@ public class ControllerJeu{
         }
         ));
         mouvementCollision.setCycleCount(Animation.INDEFINITE);
-        /*
-            if(peutetre())
-                if(conditionvictoire()){
-
-                    win();
-                    primaryStage.close();
-                }
-                else{
-                    loose();
-                    primaryStage.close();
-                }
-        }*/
     }
 
-    public void startMouvementCollision(){
+    private void startMouvementCollision(){
         mouvementCollision.play();
     }
 
-    public void stopMouvmentCollision(){
+    private void stopMouvmentCollision(){
         mouvementCollision.stop();
     }
 
     private  void gagner(){
         stopMouvmentCollision();
         finJeu();
-        //Stage.setScene(Perdre);
+        stage.setScene(gagne);
     }
 
     private void perdre(){
         stopMouvmentCollision();
         finJeu();
-        //Stage.setScene(perdre);
+        stage.setScene(perdu);
     }
 
-    private boolean conditionVictoire(){
-        return true;
+    private void conditionVictoire(){
+        if(vaisseau.getVitesseY()<=12&&vaisseau.getRotation()>80&&vaisseau.getRotation()<100)
+            gagner();
+        else
+            perdre();
     }
 
     private void collision() {
-        //if Collision{
-        //if Condition victoire==true
-        //else ConditionVictoire==false
-        //}
-        return;
+        if (1==1){
+            finJeu();
+            conditionVictoire();
+        }
     }
 }

@@ -1,3 +1,6 @@
+/**
+ * Created by Chroon on 2016-11-08.
+ */
 package Model;
 
 import javafx.scene.paint.Color;
@@ -8,20 +11,10 @@ import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 
-import java.util.Map;
 import java.util.Vector;
 import java.util.stream.IntStream;
 
-/**
- * Created by Chroon on 2016-11-08.
- */
 public class Sol {
-    /*
-    Ininitialisateur de point(constructeur)
-    Liste de point (souvenir)
-    Path
-    note: mettre path colueur selon planete
-     */
 
     private int precision;
     private Path solPath;

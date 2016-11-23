@@ -3,5 +3,12 @@
  */
 package View;
 
+import javafx.scene.Scene;
+
 public class Gagner {
+    private static Scene gagner;
+
+    public static Scene getScene() {
+        return gagner;
+    }
 }

@@ -5,7 +5,6 @@ package View;
 
 import Model.Vaisseau;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;

@@ -136,7 +136,7 @@ public class Choix {
             choixDifficulte=3;
         });
         pret.setOnAction(event -> {
-            controller.setJeu(choixPLanete,choixDifficulte,nomVaisseau.getText(),leStage);
+            controller.setJeu(choixPLanete,choixDifficulte,nomVaisseau.getText());
             //pop up controle
 
         });

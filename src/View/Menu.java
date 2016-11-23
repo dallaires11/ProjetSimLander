@@ -69,10 +69,6 @@ public class Menu extends Group{
         return  menu;
     }
     /*
-    Scene
-    demande un nom p etre
-    3 choix de depart: commencer qui memne a choix de diff, choisir plante(gravite)
-    option: sons option , mode berserk/chaos
     Video??? si temps
     credit??? si temps
     revenir menu quand mort

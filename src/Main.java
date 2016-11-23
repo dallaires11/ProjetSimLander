@@ -3,7 +3,6 @@ import Controller.Points;
 import Model.Sol;
 import Model.Vaisseau;
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.shape.Path;
 import javafx.stage.Stage;
 import View.*;
@@ -20,19 +19,16 @@ public class Main extends Application {
     Path solCourant;
     ControllerJeu controller;
 
-
     @Override
     public void start(Stage primaryStage) throws Exception{
         leStage=primaryStage;
         vaisseau=new Vaisseau();
         sol=new Sol();
         vueJeu=new SceneJeu(leStage);
-        controller=new ControllerJeu(vaisseau,sol,vueJeu);
         choix=new Choix(leStage,controller);
         option=new Option(leStage);
-        //vueJeu=new SceneJeu(vaisseau,sol.getPath());
         menu=new Menu(leStage,choix,option);
-        Group root = new Group();
+        controller=new ControllerJeu(vaisseau,sol,vueJeu,leStage,Perdre.getScene(), Gagner.getScene());
         primaryStage.setTitle("SimLander");
         primaryStage.setScene(menu.getSceneMenu());
         primaryStage.show();
