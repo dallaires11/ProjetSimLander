@@ -21,14 +21,16 @@ public class ControllerJeu{
     private Scene perdu,gagne;
     private Stage stage;
     private int diff;
+    private Points points;
 
-    public ControllerJeu(Vaisseau vaisseau, Sol sol, SceneJeu jeu,Stage leStage, Scene perdu, Scene gagne){
+    public ControllerJeu(Vaisseau vaisseau, Sol sol, SceneJeu jeu,Stage leStage, Scene perdu, Scene gagne,Points points){
         this.jeu=jeu;
         this.vaisseau=vaisseau;
         this.sol=sol;
         stage=leStage;
         this.perdu=perdu;
         this.gagne=gagne;
+        this.points=points;
         initialisationMouvementCollision();
     }
 
@@ -36,9 +38,13 @@ public class ControllerJeu{
         this.diff = diff;
         sol.genererPath(diff,planete);
         vaisseau.setNom(nom);
+        vaisseau.setRotate(90);
+        vaisseau.setVitesseIni(0);
         jeu.addElementJeu(vaisseau,sol.getPath());
-        //points.startPoint();
         stage.setScene(jeu.getSceneJeu());
+
+        points.resetPoints();
+        points.startPoint();
 
         startMouvementCollision();
 
@@ -54,6 +60,8 @@ public class ControllerJeu{
             vaisseau.accelerer(jeu.appuyerGaz());
             jeu.deplacement(vaisseau.getTranslateX()+vaisseau.getVitesseX(),
                     vaisseau.getTranslateY()-vaisseau.getVitesseY());
+            if (jeu.appuyerGaz())
+                jeu.setGaz(vaisseau.getEssence());
 
             collision();
         }
@@ -71,13 +79,16 @@ public class ControllerJeu{
 
     private  void gagner(){
         stopMouvmentCollision();
+        points.stopPoint();
         finJeu();
         stage.setScene(gagne);
     }
 
     private void perdre(){
         stopMouvmentCollision();
+        points.stopPoint();
         finJeu();
+
         stage.setScene(perdu);
     }
 
