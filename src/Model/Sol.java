@@ -57,7 +57,7 @@ public class Sol {
     private Path generateur(int diff, int variation){
         Path path;
         Vector<Integer> temp = new Vector<>();
-        IntStream.iterate(0, i -> i = (int) (Math.random() * variation) + 80)
+        IntStream.iterate((int) (Math.random()*variation), i -> i = (int) (Math.random() * variation) + 80)
                     .limit(140)
                     .forEach(i -> temp.add(i));
 
