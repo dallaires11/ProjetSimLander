@@ -6,6 +6,7 @@ package View;
 import Model.Vaisseau;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Path;
@@ -36,10 +37,10 @@ public class SceneJeu {
             if(event.getCode()== KeyCode.UP)
                 accelerationJoueur=true;
             if(event.getCode()== KeyCode.LEFT) {
-                vaisseau.rotationGauche(3);
+                vaisseau.rotationGauche(5);
             }
             if(event.getCode()== KeyCode.RIGHT) {
-                vaisseau.rotationDroite(3);
+                vaisseau.rotationDroite(5);
             }
         });
         jeu.setOnKeyReleased(event -> {
@@ -73,7 +74,7 @@ public class SceneJeu {
     }
 
     private void setPositionInitial(){
-        vaisseau.setTranslateX(690);
+        vaisseau.setTranslateX(690-vaisseau.getNomTailleMod());
         vaisseau.setTranslateY(80);
         vaisseau.setPosInitial(690,80);
     }

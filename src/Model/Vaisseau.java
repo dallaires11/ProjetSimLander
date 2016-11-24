@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 public class Vaisseau extends Group {
 
@@ -66,11 +67,11 @@ public class Vaisseau extends Group {
         positionX += vitesseX;
         positionY -= vitesseY;
 
-        if(positionX <= -20){
+        if(positionX <= -20-getNomTailleMod()){
             positionX = 1400;
             this.setTranslateX(positionX);
         }
-        if(positionX >= 1420){
+        if(positionX >= 1420+getNomTailleMod()){
             positionX = 0;
             this.setTranslateX(positionX);
         }
@@ -133,6 +134,12 @@ public class Vaisseau extends Group {
 
     public double getVitesseY(){
         return vitesseY;
+    }
+
+    public double getNomTailleMod(){
+        Text test =new Text (nom.getText());
+        double test2 = test.getBoundsInLocal().getWidth()/2;
+        return  test2;
     }
 
 
