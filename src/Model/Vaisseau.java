@@ -147,5 +147,13 @@ public class Vaisseau extends Group {
         vitesseY=0;
     }
 
+    public void setEssence(int x){
+        essence=x;
+    }
+
+    public void setRotationIni(){
+        rotation=90;
+        structure.setRotate(0);
+    }
 
 }

@@ -72,6 +72,9 @@ public class SceneJeu {
         root.getChildren().removeAll(vaisseau,sol);
         vaisseau=null;
         sol=null;
+        accelerationJoueur=false;
+        points.setText("Points: 14000");
+        gaz.setText("Gaz: 1000");
     }
 
     private void setPosition(Stage stage){

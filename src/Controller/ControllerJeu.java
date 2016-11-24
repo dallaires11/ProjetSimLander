@@ -38,8 +38,12 @@ public class ControllerJeu{
         this.diff = diff;
         sol.genererPath(diff,planete);
         vaisseau.setNom(nom);
-        vaisseau.setRotate(90);
+        vaisseau.setRotate(0);
         vaisseau.setVitesseIni(0);
+        vaisseau.setEssence(1000);
+        vaisseau.setRotationIni();
+
+
         jeu.addElementJeu(vaisseau,sol.getPath());
         stage.setScene(jeu.getSceneJeu());
 
