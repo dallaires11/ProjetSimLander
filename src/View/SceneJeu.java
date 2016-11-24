@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Path;
 import javafx.stage.Stage;
 
@@ -20,19 +21,21 @@ public class SceneJeu {
     private Vaisseau vaisseau;
     private Path sol;
     private ImageView fond;
-    private Label points;
+    private Label points,gaz;
 
     public SceneJeu(Stage stage){
         accelerationJoueur=false;
         vaisseau=null;
         sol=null;
         fond=new ImageView("Image/fondJeu.jpg");
-        points=new Label("Points: ");
+        points=new Label("Points: 14000");
+        gaz=new Label("Gaz: 1000L");
 
+        setText();
         setPosition(stage);
 
         root=new Group();
-        root.getChildren().add(fond);
+        root.getChildren().addAll(fond,gaz,points);
 
         jeu=new Scene(root,1400,700);
 
@@ -72,8 +75,12 @@ public class SceneJeu {
     }
 
     private void setPosition(Stage stage){
-        //fond.fitHeightProperty().bind(stage.heightProperty());
-        //fond.fitWidthProperty().bind(stage.widthProperty());
+        fond.fitHeightProperty().bind(stage.heightProperty());
+        fond.fitWidthProperty().bind(stage.widthProperty());
+        gaz.setTranslateY(20);
+        gaz.setTranslateX(10);
+        points.setTranslateY(10);
+        points.setTranslateX(10);
     }
 
     private void setPositionInitial(){
@@ -93,5 +100,14 @@ public class SceneJeu {
 
     public void setPoints(int nb){
         points.setText("Points: "+nb);
+    }
+
+    public void setGaz(int qt){
+        gaz.setText("Gaz: "+qt+"L");
+    }
+
+    private void setText(){
+        gaz.setTextFill(Color.WHITE);
+        points.setTextFill(Color.WHITE);
     }
 }

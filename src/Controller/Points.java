@@ -4,6 +4,7 @@
 package Controller;
 
 import View.SceneJeu;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
@@ -13,7 +14,7 @@ public class Points {
     private int points;
     private SceneJeu jeu;
 
-    public Points() {
+    public Points(SceneJeu jeu) {
         points = 14000;
 
         point = new Timeline(new KeyFrame(
@@ -22,6 +23,7 @@ public class Points {
             jeu.setPoints(points);
         }
         ));
+        point.setCycleCount(Animation.INDEFINITE);
     }
 
     public void startPoint(){

@@ -19,7 +19,6 @@ public class Main extends Application {
     private ControllerJeu controller;
     private Perdre perdre;
     private Gagner gagner;
-
     @Override
     public void start(Stage primaryStage) throws Exception{
         leStage=primaryStage;
@@ -28,7 +27,8 @@ public class Main extends Application {
         vueJeu=new SceneJeu(leStage);
         perdre=new Perdre(leStage);
         gagner=new Gagner(leStage);
-        controller=new ControllerJeu(vaisseau,sol,vueJeu,leStage,perdre.getScene(), gagner.getScene());
+        points=new Points(vueJeu);
+        controller=new ControllerJeu(vaisseau,sol,vueJeu,leStage,perdre.getScene(),gagner.getScene(),points);
         choix=new Choix(leStage,controller);
         option=new Option(leStage);
         menu=new Menu(leStage,choix,option);

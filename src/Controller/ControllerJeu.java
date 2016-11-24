@@ -38,9 +38,10 @@ public class ControllerJeu{
         sol.genererPath(diff,planete);
         vaisseau.setNom(nom);
         jeu.addElementJeu(vaisseau,sol.getPath());
-        points.startPoint();
         stage.setScene(jeu.getSceneJeu());
+
         points.resetPoints();
+        points.startPoint();
 
         startMouvementCollision();
 
@@ -56,6 +57,8 @@ public class ControllerJeu{
             vaisseau.accelerer(jeu.appuyerGaz());
             jeu.deplacement(vaisseau.getTranslateX()+vaisseau.getVitesseX(),
                     vaisseau.getTranslateY()-vaisseau.getVitesseY());
+            if (jeu.appuyerGaz())
+                jeu.setGaz(vaisseau.getEssence());
 
             //collision();
         }

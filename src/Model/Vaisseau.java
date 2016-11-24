@@ -44,7 +44,7 @@ public class Vaisseau extends Group {
 
 
     public void reduireEssence(int reduction) {
-        essence += reduction;
+        essence -= reduction;
     }
 
     public void rotationGauche(int vitesseRotation) {
@@ -82,10 +82,10 @@ public class Vaisseau extends Group {
         double accelerationX = 0;
         double accelerationY = 0;
         double radian=Math.toRadians(rotation);
-        if (appuyer) {
+        if (appuyer&&essence!=0) {
             accelerationX =(float) (0.035 * Math.cos(radian));
             accelerationY =(float) (0.035 * Math.sin(radian));
-            reduireEssence(10);
+            reduireEssence(2);
         }
         vitesseX += accelerationX;
         vitesseY += accelerationY - 0.0098;
