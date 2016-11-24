@@ -37,6 +37,8 @@ public class ControllerJeu{
     public void setJeu(int planete, int diff, String nom){
         sol.genererPath(diff,planete);
         vaisseau.setNom(nom);
+        vaisseau.setRotate(90);
+        vaisseau.setVitesseIni(0);
         jeu.addElementJeu(vaisseau,sol.getPath());
         stage.setScene(jeu.getSceneJeu());
 

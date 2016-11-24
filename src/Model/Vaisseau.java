@@ -142,5 +142,10 @@ public class Vaisseau extends Group {
         return  test2;
     }
 
+    public void setVitesseIni(int x){
+        vitesseX=0;
+        vitesseY=0;
+    }
+
 
 }
