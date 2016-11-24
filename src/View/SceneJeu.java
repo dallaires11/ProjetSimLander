@@ -6,6 +6,7 @@ package View;
 import Model.Vaisseau;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -19,12 +20,14 @@ public class SceneJeu {
     private Vaisseau vaisseau;
     private Path sol;
     private ImageView fond;
+    private Label points;
 
     public SceneJeu(Stage stage){
         accelerationJoueur=false;
         vaisseau=null;
         sol=null;
         fond=new ImageView("Image/fondJeu.jpg");
+        points=new Label("Points: ");
 
         setPosition(stage);
 
@@ -86,5 +89,9 @@ public class SceneJeu {
     public void deplacement(double x,double y){
         vaisseau.setTranslateX(x);
         vaisseau.setTranslateY(y);
+    }
+
+    public void setPoints(int nb){
+        points.setText("Points: "+nb);
     }
 }

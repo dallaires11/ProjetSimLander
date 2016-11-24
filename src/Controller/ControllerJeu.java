@@ -20,14 +20,16 @@ public class ControllerJeu{
     private SceneJeu jeu;
     private Scene perdu,gagne;
     private Stage stage;
+    private Points points;
 
-    public ControllerJeu(Vaisseau vaisseau, Sol sol, SceneJeu jeu,Stage leStage, Scene perdu, Scene gagne){
+    public ControllerJeu(Vaisseau vaisseau, Sol sol, SceneJeu jeu,Stage leStage, Scene perdu, Scene gagne,Points points){
         this.jeu=jeu;
         this.vaisseau=vaisseau;
         this.sol=sol;
         stage=leStage;
         this.perdu=perdu;
         this.gagne=gagne;
+        this.points=points;
 
         initialisationMouvementCollision();
     }
@@ -36,8 +38,9 @@ public class ControllerJeu{
         sol.genererPath(diff,planete);
         vaisseau.setNom(nom);
         jeu.addElementJeu(vaisseau,sol.getPath());
-        //points.startPoint();
+        points.startPoint();
         stage.setScene(jeu.getSceneJeu());
+        points.resetPoints();
 
         startMouvementCollision();
 
@@ -70,13 +73,16 @@ public class ControllerJeu{
 
     private  void gagner(){
         stopMouvmentCollision();
+        points.stopPoint();
         finJeu();
         stage.setScene(gagne);
     }
 
     private void perdre(){
         stopMouvmentCollision();
+        points.stopPoint();
         finJeu();
+
         stage.setScene(perdu);
     }
 
