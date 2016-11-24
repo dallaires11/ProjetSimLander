@@ -20,6 +20,7 @@ public class ControllerJeu{
     private SceneJeu jeu;
     private Scene perdu,gagne;
     private Stage stage;
+    private int diff;
 
     public ControllerJeu(Vaisseau vaisseau, Sol sol, SceneJeu jeu,Stage leStage, Scene perdu, Scene gagne){
         this.jeu=jeu;
@@ -28,11 +29,11 @@ public class ControllerJeu{
         stage=leStage;
         this.perdu=perdu;
         this.gagne=gagne;
-
         initialisationMouvementCollision();
     }
 
     public void setJeu(int planete, int diff, String nom){
+        this.diff = diff;
         sol.genererPath(diff,planete);
         vaisseau.setNom(nom);
         jeu.addElementJeu(vaisseau,sol.getPath());
@@ -54,7 +55,7 @@ public class ControllerJeu{
             jeu.deplacement(vaisseau.getTranslateX()+vaisseau.getVitesseX(),
                     vaisseau.getTranslateY()-vaisseau.getVitesseY());
 
-            //collision();
+            collision();
         }
         ));
         mouvementCollision.setCycleCount(Animation.INDEFINITE);
@@ -81,15 +82,27 @@ public class ControllerJeu{
     }
 
     private void conditionVictoire(){
-        if(vaisseau.getVitesseY()<=12&&vaisseau.getRotation()>80&&vaisseau.getRotation()<100)
-            gagner();
-        else
+        if(vaisseau.getX()/10 >= sol.getPlat1() && ((vaisseau.getX()+20)/10) <= sol.getPlat1() + (6/diff)) {
+            if (vaisseau.getVitesseY() <= 12 && vaisseau.getRotation() > 80 && vaisseau.getRotation() < 100)
+                gagner();
+            else
+                perdre();
+        } else if (vaisseau.getX()/10 >= sol.getPlat2() && ((vaisseau.getX()+20)/10) <= sol.getPlat2() + (6/diff)){
+            if (vaisseau.getVitesseY() <= 12 && vaisseau.getRotation() > 80 && vaisseau.getRotation() < 100)
+                gagner();
+            else
+                perdre();
+        } else
             perdre();
     }
 
     private void collision() {
-        if (1==2){
-            finJeu();
+        if (vaisseau.getY() >= sol.getSolValeurs().get((int)(Math.round(vaisseau.getX()/10))) || vaisseau.getY() >= sol.getSolValeurs().get((int)((Math.round(vaisseau.getX()+20) /10)))){
+            System.out.println("X : " + vaisseau.getX());
+            System.out.println("Y : " + vaisseau.getY());
+            System.out.println("rotation : " + vaisseau.getRotation());
+            System.out.println(sol.getPlat1());
+            System.out.println(sol.getPlat2());
             conditionVictoire();
         }
     }

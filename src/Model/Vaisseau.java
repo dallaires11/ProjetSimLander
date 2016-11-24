@@ -102,7 +102,7 @@ public class Vaisseau extends Group {
     }
 
     public double getY(){
-        return positionY;
+        return positionY + org.getHeight();
     }
 
     public void setPosInitial(int x,int y){

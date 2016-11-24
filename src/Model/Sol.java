@@ -19,6 +19,9 @@ public class Sol {
     private int precision;
     private Path solPath;
     private Vector<Integer> solValeurs;
+    private int plat1;
+    private int plat2;
+    private int diff;
 
 
     public Sol(){
@@ -27,6 +30,7 @@ public class Sol {
     }
 
     public void genererPath(int diff,int planete){
+        this.diff = diff;
         if (planete == 1) {
             solPath = generateur(diff, 75);
         }
@@ -51,14 +55,14 @@ public class Sol {
     }
 
     private Path generateur(int diff, int variation){
-        Path path = new Path();
+        Path path;
         Vector<Integer> temp = new Vector<>();
         IntStream.iterate(0, i -> i = (int) (Math.random() * variation) + 80)
                     .limit(140)
                     .forEach(i -> temp.add(i));
 
-            int plat1 = 70 - (int)(Math.random() * 65);
-            int plat2 = (int)(Math.random() * 65) + 70;
+            plat1 = 70 - (int)(Math.random() * 65);
+            plat2 = (int)(Math.random() * 65) + 70;
 
             Path ground = new Path();
             for (int x = 0; x < 140; x++) {
@@ -68,7 +72,6 @@ public class Sol {
                 else if (x == plat1 || x == plat2) {
                     int h = 700 - temp.get(x);
                     ground.getElements().addAll(new LineTo(x * precision, h));
-
                     x += 6/diff;
                     ground.getElements().addAll(new LineTo(x * precision, h));
                     for (int z = 0; z < diff; z++) {
@@ -107,5 +110,17 @@ public class Sol {
                 solPath.setStroke(Color.GREEN);
                 break;
         }
+    }
+
+    public int getPlat1(){
+        return plat1;
+    }
+
+    public int getPlat2(){
+        return plat2;
+    }
+
+    public int getDiff(){
+        return diff;
     }
 }
