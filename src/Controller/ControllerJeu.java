@@ -98,12 +98,12 @@ public class ControllerJeu{
 
     private void conditionVictoire(){
         if(vaisseau.getX()/10 >= sol.getPlat1() && ((vaisseau.getX()+20)/10) <= sol.getPlat1() + (6/diff)) {
-            if (vaisseau.getVitesseY() <= 12 && vaisseau.getRotation() > 80 && vaisseau.getRotation() < 100)
+            if (vaisseau.getVitesseY() <= 2 && vaisseau.getRotation() > 80 && vaisseau.getRotation() < 100)
                 gagner();
             else
                 perdre();
         } else if (vaisseau.getX()/10 >= sol.getPlat2() && ((vaisseau.getX()+20)/10) <= sol.getPlat2() + (6/diff)){
-            if (vaisseau.getVitesseY() <= 12 && vaisseau.getRotation() > 80 && vaisseau.getRotation() < 100)
+            if (vaisseau.getVitesseY() <= 2 && vaisseau.getRotation() > 80 && vaisseau.getRotation() < 100)
                 gagner();
             else
                 perdre();
@@ -112,12 +112,26 @@ public class ControllerJeu{
     }
 
     private void collision() {
-        if (vaisseau.getY() >= sol.getSolValeurs().get((int)(Math.round(vaisseau.getX()/10))) || vaisseau.getY() >= sol.getSolValeurs().get((int)((Math.round(vaisseau.getX()+20) /10)))){
+        double valeurPrecise1 = (sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10)))
+                + (((sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10) + 1)) - sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10)))) / 10)
+                * (((vaisseau.getX() / 10) - Math.round(vaisseau.getX()/10)) * 10)));
+
+        double valeurPrecise2 = (sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10) + 2))
+                + (((sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10) + 1)) - sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10) + 2))) / 10)
+                * (((vaisseau.getX() / 10) - Math.round(vaisseau.getX())/10) * 10)));
+
+        if (vaisseau.getY() >= valeurPrecise1 || vaisseau.getY() >= valeurPrecise2){
             System.out.println("X : " + vaisseau.getX());
+            System.out.println("X arrondi : " + (int) (Math.round(vaisseau.getX()/10)));
+            System.out.println("X2 : " + (vaisseau.getX() + 20));
+            System.out.println("X2 arrondi : " + (int) (Math.round(vaisseau.getX()/10) + 2));
             System.out.println("Y : " + vaisseau.getY());
             System.out.println("rotation : " + vaisseau.getRotation());
-            System.out.println(sol.getPlat1());
-            System.out.println(sol.getPlat2());
+            System.out.println("Vitesse : " + vaisseau.getVitesseY());
+            System.out.println("Sol 1 : " + valeurPrecise1);
+            System.out.println("sol 2 : " + valeurPrecise2);
+            System.out.println("plat 1 : " + sol.getPlat1());
+            System.out.println("plat 2 : " + sol.getPlat2());
             conditionVictoire();
         }
     }

@@ -25,7 +25,7 @@ public class Sol {
 
 
     public Sol(){
-        solValeurs = new Vector<Integer>();
+        solValeurs = new Vector<>();
         precision = 10;
     }
 
@@ -57,12 +57,12 @@ public class Sol {
     private Path generateur(int diff, int variation){
         Path path;
         Vector<Integer> temp = new Vector<>();
-        IntStream.iterate((int) (Math.random()*variation), i -> i = (int) (Math.random() * variation) + 80)
+        IntStream.iterate((int) (Math.random() * variation), i -> i = (int) (Math.random() * variation) + 80)
                     .limit(140)
                     .forEach(i -> temp.add(i));
 
             plat1 = 70 - (int)(Math.random() * 65);
-            plat2 = (int)(Math.random() * 65) + 70;
+            plat2 = (int)(Math.random() * 60) + 70;
 
             Path ground = new Path();
             for (int x = 0; x < 140; x++) {
@@ -74,7 +74,7 @@ public class Sol {
                     ground.getElements().addAll(new LineTo(x * precision, h));
                     x += 6/diff;
                     ground.getElements().addAll(new LineTo(x * precision, h));
-                    for (int z = 0; z < diff; z++) {
+                    for (int z = 0; z < (6/diff); z++) {
                         solValeurs.add(h);
                     }
 
@@ -84,6 +84,7 @@ public class Sol {
                 }
             }
 
+        ground.getElements().addAll(new LineTo(1400,700), new LineTo(0,700));
         path = ground;
         return path;
     }
@@ -92,19 +93,23 @@ public class Sol {
         switch (planete){
             case 1:
                 solPath.setStroke(Color.GREEN);
+                solPath.setFill(Color.GREEN);
                 break;
             case 2:
                 solPath.setStroke(Color.DARKORANGE);
+                solPath.setFill(Color.DARKORANGE);
                 break;
             case 3:
                 LinearGradient lnGr1=new LinearGradient(0,0,1,1,true, CycleMethod.NO_CYCLE,
                         new Stop(0,Color.WHITE),new Stop(1,Color.DARKGRAY));
                 solPath.setStroke(lnGr1);
+                solPath.setFill(lnGr1);
                 break;
             case 4:
                 LinearGradient lnGr2=new LinearGradient(0,0,.5,1,true, CycleMethod.REFLECT,
                         new Stop(0,Color.FIREBRICK),new Stop(1,Color.AQUAMARINE));
                 solPath.setStroke(lnGr2);
+                solPath.setFill(lnGr2);
                 break;
             default:
                 solPath.setStroke(Color.GREEN);
