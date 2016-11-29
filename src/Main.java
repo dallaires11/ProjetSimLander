@@ -1,4 +1,5 @@
 import Controller.ControllerJeu;
+import Controller.IntroJeu;
 import Controller.Points;
 import Model.Sol;
 import Model.Vaisseau;
@@ -19,6 +20,8 @@ public class Main extends Application {
     private ControllerJeu controller;
     private Perdre perdre;
     private Gagner gagner;
+    private IntroJeu intro;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         leStage=primaryStage;
@@ -32,7 +35,9 @@ public class Main extends Application {
         choix=new Choix(leStage,controller);
         option=new Option(leStage);
         menu=new Menu(leStage,choix,option);
+        intro=new IntroJeu();
         primaryStage.setTitle("SimLander");
+        //primaryStage.setScene(intro.getSceneIntro(leStage));
         primaryStage.setScene(menu.getSceneMenu());
         primaryStage.show();
     }
