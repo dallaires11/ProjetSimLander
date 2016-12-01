@@ -8,6 +8,7 @@ import javafx.animation.*;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -25,7 +26,7 @@ public class IntroJeu {
     private MediaPlayer intro;
 
     public IntroJeu(){
-        intro=new MediaPlayer(new Media(new File("src/Sound/Intro.mp3").toURI().toString()));
+        intro=new MediaPlayer(new Media(new File("src/Sound/IntroMusic.mp3").toURI().toString()));
         vaisseau=new ImageView("Image/Spaceship.png");
         fond=new ImageView("Image/fondJeu.jpg");
         logo=new ImageView("Image/LogoComp.png");
@@ -85,11 +86,30 @@ public class IntroJeu {
         ftLogo.setFromValue(0);
         ftLogo.setToValue(1);
 
+        PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
+
+        FadeTransition versMenu = new FadeTransition(Duration.seconds(2),root);
+        versMenu.setFromValue(1);
+        versMenu.setToValue(0);
+
         ParallelTransition pt = new ParallelTransition(ft,tt1);
 
-        SequentialTransition st = new SequentialTransition(pt,tt2,tt3,ftLogo);
+        SequentialTransition st = new SequentialTransition(pt,tt2,tt3,ftLogo,pause,versMenu);
+
+        sceneIntro.setOnKeyPressed(event->{
+            if(event.getCode()== KeyCode.SPACE) {
+                st.jumpTo(st.getTotalDuration());
+                intro.stop();
+            }
+        });
+
+        intro.play();
         st.play();
 
-        stage.setScene(Menu.getSceneMenu());
+        st.setOnFinished(event-> stage.setScene(Menu.getSceneMenu()));
     }
+
+    //idée faire plusieur inro possible??
 }
+
+

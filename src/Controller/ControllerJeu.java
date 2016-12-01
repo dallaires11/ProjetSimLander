@@ -3,34 +3,44 @@
  */
 package Controller;
 
+import Interface.OptionChoisi;
+import Interface.TCI;
 import Model.Sol;
 import Model.Vaisseau;
+import View.Gagner;
+import View.Perdre;
 import View.SceneJeu;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class ControllerJeu{
-    private Timeline gaz,mouvementCollision;
+public class ControllerJeu implements TCI{
+    private Timeline mouvementCollision;
     private Vaisseau vaisseau;
     private Sol sol;
     private SceneJeu jeu;
-    private Scene perdu,gagne;
+    private Gagner gagne;
+    private Perdre perdre;
     private Stage stage;
     private int diff;
     private Points points;
+    private OptionChoisi optChoisi;
+    private Turret turret;
 
-    public ControllerJeu(Vaisseau vaisseau, Sol sol, SceneJeu jeu,Stage leStage, Scene perdu, Scene gagne,Points points){
+    public ControllerJeu(Vaisseau vaisseau, Sol sol, SceneJeu jeu,Stage leStage, Perdre perdu, Gagner gagne,
+                         Points points,OptionChoisi optChosi,Turret turret){
         this.jeu=jeu;
         this.vaisseau=vaisseau;
         this.sol=sol;
         stage=leStage;
-        this.perdu=perdu;
+        perdre=perdu;
         this.gagne=gagne;
         this.points=points;
+        this.optChoisi=optChosi;
+        this.turret=turret;
+
         initialisationMouvementCollision();
     }
 
@@ -56,6 +66,7 @@ public class ControllerJeu{
 
     private void finJeu(){
         jeu.cleanup();
+        sol.cleanup();
     }
 
     private void initialisationMouvementCollision(){
@@ -85,15 +96,16 @@ public class ControllerJeu{
         stopMouvmentCollision();
         points.stopPoint();
         finJeu();
-        stage.setScene(gagne);
+        stage.setScene(gagne.getScene());
     }
 
-    private void perdre(){
+    public void perdre(){
         stopMouvmentCollision();
+        turret.finAttaqueOrbital();
         points.stopPoint();
         finJeu();
 
-        stage.setScene(perdu);
+        stage.setScene(perdre.getScene());
     }
 
     private void conditionVictoire(){
@@ -134,5 +146,12 @@ public class ControllerJeu{
             System.out.println("plat 2 : " + sol.getPlat2());
             conditionVictoire();
         }
+    }
+
+    private void chargementOption(){
+        if(optChoisi.asaultOrbital()){
+            turret.commencerAttaqueObirtal(diff);
+        }
+
     }
 }

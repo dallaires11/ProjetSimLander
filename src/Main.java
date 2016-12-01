@@ -1,6 +1,9 @@
 import Controller.ControllerJeu;
 import Controller.IntroJeu;
 import Controller.Points;
+import Controller.Turret;
+import Interface.OptionChoisi;
+import Interface.TCI;
 import Model.Sol;
 import Model.Vaisseau;
 import javafx.application.Application;
@@ -21,6 +24,9 @@ public class Main extends Application {
     private Perdre perdre;
     private Gagner gagner;
     private IntroJeu intro;
+    private Turret turret;
+    private TCI tci;
+    private OptionChoisi oChoisi;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -31,14 +37,15 @@ public class Main extends Application {
         perdre=new Perdre(leStage);
         gagner=new Gagner(leStage);
         points=new Points(vueJeu);
-        controller=new ControllerJeu(vaisseau,sol,vueJeu,leStage,perdre.getScene(),gagner.getScene(),points);
+        turret=new Turret(vaisseau,vueJeu,tci);
+        controller=new ControllerJeu(vaisseau,sol,vueJeu,leStage,perdre,gagner,points,oChoisi,turret);
         choix=new Choix(leStage,controller);
         option=new Option(leStage);
         menu=new Menu(leStage,choix,option);
         intro=new IntroJeu();
         primaryStage.setTitle("SimLander");
-        //primaryStage.setScene(intro.getSceneIntro(leStage));
-        primaryStage.setScene(menu.getSceneMenu());
+        primaryStage.setScene(intro.getSceneIntro(leStage));
+        //primaryStage.setScene(menu.getSceneMenu());
         primaryStage.show();
     }
 

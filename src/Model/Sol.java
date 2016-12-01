@@ -128,4 +128,8 @@ public class Sol {
     public int getDiff(){
         return diff;
     }
+
+    public void cleanup(){
+        solValeurs.clear();
+    }
 }
