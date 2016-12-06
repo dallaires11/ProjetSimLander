@@ -23,11 +23,10 @@ public class Turret {
     private TCI tci;
     private int diff;
 
-    public Turret(Vaisseau vaisseau,SceneJeu jeu,TCI tci){
+    public Turret(Vaisseau vaisseau,SceneJeu jeu){
         this.vaisseau=vaisseau;
         sceneJeu=jeu;
         cible=new Circle(10);
-        this.tci=tci;
         diff=1;
 
         initialiserTir();
@@ -83,6 +82,9 @@ public class Turret {
 
     public void finAttaqueOrbital(){
         ciblage.stop();
+    }
 
+    public void setInterfacePerdre(TCI tci){
+        this.tci=tci;
     }
 }

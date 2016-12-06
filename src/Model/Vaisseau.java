@@ -20,6 +20,7 @@ public class Vaisseau extends Group {
     private Label nom;
     private VBox org;
     private ImageView structure;
+    private boolean depenseEssence;
 
     public Vaisseau() {
         essence = 1000;
@@ -29,6 +30,7 @@ public class Vaisseau extends Group {
         positionX = 0;
         positionY = 0;
         nom = new Label("");
+        depenseEssence=true;
 
         structure= new ImageView("Image/Spaceship.png");
         structure.setFitHeight(20);
@@ -85,7 +87,8 @@ public class Vaisseau extends Group {
         if (appuyer&&essence!=0) {
             accelerationX =(float) (0.035 * Math.cos(radian));
             accelerationY =(float) (0.035 * Math.sin(radian));
-            reduireEssence(2);
+            if (depenseEssence)
+                reduireEssence(2);
         }
         vitesseX += accelerationX;
         vitesseY += accelerationY - 0.0098;
@@ -108,6 +111,7 @@ public class Vaisseau extends Group {
     public void setPosInitial(int x,int y){
         positionX=x;
         positionY=y;
+        depenseEssence=true;
     }
 
     public int getRotation(){
@@ -154,6 +158,10 @@ public class Vaisseau extends Group {
     public void setRotationIni(){
         rotation=90;
         structure.setRotate(0);
+    }
+
+    public  void essenceInfini(){
+        depenseEssence=false;
     }
 
 }

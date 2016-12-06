@@ -30,7 +30,7 @@ public class ControllerJeu implements TCI{
     private Turret turret;
 
     public ControllerJeu(Vaisseau vaisseau, Sol sol, SceneJeu jeu,Stage leStage, Perdre perdu, Gagner gagne,
-                         Points points,OptionChoisi optChosi,Turret turret){
+                         Points points,Turret turret){
         this.jeu=jeu;
         this.vaisseau=vaisseau;
         this.sol=sol;
@@ -38,10 +38,15 @@ public class ControllerJeu implements TCI{
         perdre=perdu;
         this.gagne=gagne;
         this.points=points;
-        this.optChoisi=optChosi;
         this.turret=turret;
 
+        turret.setInterfacePerdre(this);
+
         initialisationMouvementCollision();
+    }
+
+    public void setInterfaceChoix(OptionChoisi choix){
+        optChoisi=choix;
     }
 
     public void setJeu(int planete, int diff, String nom){
@@ -61,6 +66,8 @@ public class ControllerJeu implements TCI{
         points.startPoint();
 
         startMouvementCollision();
+
+        chargementOption();
 
     }
 
@@ -153,5 +160,12 @@ public class ControllerJeu implements TCI{
             turret.commencerAttaqueObirtal(diff);
         }
 
+        if (optChoisi.chaos()){
+            //Mode de jeu op
+        }
+
+        if (optChoisi.cheatEssence()){
+            vaisseau.essenceInfini();
+        }
     }
 }

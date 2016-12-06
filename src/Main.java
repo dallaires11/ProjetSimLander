@@ -25,8 +25,6 @@ public class Main extends Application {
     private Gagner gagner;
     private IntroJeu intro;
     private Turret turret;
-    private TCI tci;
-    private OptionChoisi oChoisi;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -37,10 +35,11 @@ public class Main extends Application {
         perdre=new Perdre(leStage);
         gagner=new Gagner(leStage);
         points=new Points(vueJeu);
-        turret=new Turret(vaisseau,vueJeu,tci);
-        controller=new ControllerJeu(vaisseau,sol,vueJeu,leStage,perdre,gagner,points,oChoisi,turret);
+        turret=new Turret(vaisseau,vueJeu);
+        controller=new ControllerJeu(vaisseau,sol,vueJeu,leStage,perdre,gagner,points,turret);
         choix=new Choix(leStage,controller);
         option=new Option(leStage);
+        controller.setInterfaceChoix(option);
         menu=new Menu(leStage,choix,option);
         intro=new IntroJeu();
         primaryStage.setTitle("SimLander");
