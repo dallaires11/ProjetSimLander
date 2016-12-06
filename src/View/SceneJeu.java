@@ -122,4 +122,9 @@ public class SceneJeu {
     public void desactiverCible(Circle cible){
         root.getChildren().remove(cible);
     }
+
+    public void deplacerCible(int x, int y){
+        root.getChildren().get(7).setTranslateX(x);
+        root.getChildren().get(7).setTranslateY(y);
+    }
 }

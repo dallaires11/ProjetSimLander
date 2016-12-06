@@ -6,17 +6,11 @@ package Controller;
 import Interface.TCI;
 import Model.Vaisseau;
 import View.SceneJeu;
-import javafx.animation.FadeTransition;
-import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
-import javafx.animation.Timeline;
-import javafx.scene.chart.LineChart;
+import javafx.animation.*;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
-
-import javax.xml.soap.SOAPPart;
 
 public class Turret {
     private Vaisseau vaisseau;
@@ -31,6 +25,8 @@ public class Turret {
         sceneJeu=jeu;
         cible=new Circle(10);
         diff=1;
+
+        setImage();
 
         initialiserTir();
         initialiserCiblage();
@@ -51,9 +47,10 @@ public class Turret {
             initialiserCiblage();
         });
         ciblage=new Timeline(new KeyFrame(Duration.seconds(4),event ->{
-            //sceneJeu.deplacementCible(vaisseau.getX(),vaisseau.getY());
+            sceneJeu.deplacerCible((int)vaisseau.getX(),(int)vaisseau.getY());
             ft.playFromStart();
         }));
+        ciblage.setCycleCount(Animation.INDEFINITE);
 
     }
     private void initialiserCiblage(){
@@ -81,7 +78,6 @@ public class Turret {
     public void commencerAttaqueObirtal(int diff){
         this.diff=diff;
         sceneJeu.activerCible(cible);
-        System.out.println("Yo");
         ciblage.play();
     }
 
