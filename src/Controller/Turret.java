@@ -44,7 +44,7 @@ public class Turret {
         ft.setFromValue(0);
         ft.setToValue(1);
         ft.setOnFinished(event->{
-            initialiserCiblage();
+            //initialiserCiblage();
         });
         ciblage=new Timeline(new KeyFrame(Duration.seconds(4),event ->{
             sceneJeu.deplacerCible((int)vaisseau.getX(),(int)vaisseau.getY());
