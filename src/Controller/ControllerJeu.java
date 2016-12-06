@@ -132,20 +132,21 @@ public class ControllerJeu implements TCI{
     }
 
     private void collision() {
-        double valeurPrecise1 = (sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10)))
-                + (((sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10) + 1)) - sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10)))) / 10)
-                * (((vaisseau.getX() / 10) - Math.round(vaisseau.getX()/10)) * 10)));
+
         double valeurPrecise1;
+        if(Math.round(vaisseau.getX()/10) < 140){
+            valeurPrecise1 = (sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10)))
+                    * (((vaisseau.getX() / 10) - Math.round(vaisseau.getX()/10)) * 10));
+        }
+        else
+            valeurPrecise1 = sol.getSolValeurs().get(140);
+        
+
         double valeurPrecise2;
-
-        valeurPrecise1 = (sol.getSolValeurs().get((int) (Math.round(vaisseau.getX() / 10)))
-                    + (((sol.getSolValeurs().get((int) (Math.round(vaisseau.getX() / 10) + 1)) - sol.getSolValeurs().get((int) (Math.round(vaisseau.getX() / 10)))) / 10)
-                    * (((vaisseau.getX() / 10) - Math.round(vaisseau.getX() / 10)) * 10)));
-
-        valeurPrecise2 = (sol.getSolValeurs().get((int) (Math.round(vaisseau.getX() / 10) + 2))
-                    + (((sol.getSolValeurs().get((int) (Math.round(vaisseau.getX() / 10) + 1)) - sol.getSolValeurs().get((int) (Math.round(vaisseau.getX() / 10) + 2))) / 10)
-                    * (((vaisseau.getX() / 10) - Math.round(vaisseau.getX()) / 10) * 10)));
-
+         if(((Math.round(vaisseau.getX()/10) + 2)) > 140)
+             valeurPrecise2 = valeurPrecise1;
+        else
+        valeurPrecise2 = (sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10) + 2))
                 + (((sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10) + 1)) - sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10) + 2))) / 10)
 
         if (vaisseau.getY() >= valeurPrecise1 || vaisseau.getY() >= valeurPrecise2){

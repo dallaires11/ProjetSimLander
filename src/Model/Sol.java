@@ -57,24 +57,27 @@ public class Sol {
     private Path generateur(int diff, int variation){
         Path path;
         Vector<Integer> temp = new Vector<>();
+
         IntStream.iterate((int) (Math.random() * variation), i -> i = (int) (Math.random() * variation) + 80)
-                    .limit(140)
-                    .forEach(i -> temp.add(i));
+                .limit(141)
+                .forEach(i -> temp.add(i));
 
             plat1 = 70 - (int)(Math.random() * 65);
             plat2 = (int)(Math.random() * 60) + 70;
 
             Path ground = new Path();
-            for (int x = 0; x < 140; x++) {
-                if (x == 0)
+            for (int x = 0; x <= 140; x++) {
+                if (x == 0) {
                     ground.getElements().add(new MoveTo(0, 700 - temp.get(x)));
+                    solValeurs.add(700 - temp.get(x));
+                }
 
                 else if (x == plat1 || x == plat2) {
                     int h = 700 - temp.get(x);
                     ground.getElements().addAll(new LineTo(x * precision, h));
-                    x += 6/diff;
+                    x += (6/diff);
                     ground.getElements().addAll(new LineTo(x * precision, h));
-                    for (int z = 0; z < (6/diff); z++) {
+                    for (int z = 0; z <= (6/diff); z++) {
                         solValeurs.add(h);
                     }
 
