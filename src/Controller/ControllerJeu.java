@@ -101,6 +101,7 @@ public class ControllerJeu implements TCI{
 
     private  void gagner(){
         stopMouvmentCollision();
+        turret.finAttaqueOrbital();
         points.stopPoint();
         finJeu();
         stage.setScene(gagne.getScene());
@@ -134,10 +135,18 @@ public class ControllerJeu implements TCI{
         double valeurPrecise1 = (sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10)))
                 + (((sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10) + 1)) - sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10)))) / 10)
                 * (((vaisseau.getX() / 10) - Math.round(vaisseau.getX()/10)) * 10)));
+        double valeurPrecise1;
+        double valeurPrecise2;
 
-        double valeurPrecise2 = (sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10) + 2))
+        valeurPrecise1 = (sol.getSolValeurs().get((int) (Math.round(vaisseau.getX() / 10)))
+                    + (((sol.getSolValeurs().get((int) (Math.round(vaisseau.getX() / 10) + 1)) - sol.getSolValeurs().get((int) (Math.round(vaisseau.getX() / 10)))) / 10)
+                    * (((vaisseau.getX() / 10) - Math.round(vaisseau.getX() / 10)) * 10)));
+
+        valeurPrecise2 = (sol.getSolValeurs().get((int) (Math.round(vaisseau.getX() / 10) + 2))
+                    + (((sol.getSolValeurs().get((int) (Math.round(vaisseau.getX() / 10) + 1)) - sol.getSolValeurs().get((int) (Math.round(vaisseau.getX() / 10) + 2))) / 10)
+                    * (((vaisseau.getX() / 10) - Math.round(vaisseau.getX()) / 10) * 10)));
+
                 + (((sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10) + 1)) - sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10) + 2))) / 10)
-                * (((vaisseau.getX() / 10) - Math.round(vaisseau.getX())/10) * 10)));
 
         if (vaisseau.getY() >= valeurPrecise1 || vaisseau.getY() >= valeurPrecise2){
             System.out.println("X : " + vaisseau.getX());

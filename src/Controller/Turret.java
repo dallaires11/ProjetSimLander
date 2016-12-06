@@ -10,10 +10,13 @@ import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
+import javafx.scene.chart.LineChart;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
+
+import javax.xml.soap.SOAPPart;
 
 public class Turret {
     private Vaisseau vaisseau;
@@ -77,10 +80,13 @@ public class Turret {
 
     public void commencerAttaqueObirtal(int diff){
         this.diff=diff;
+        sceneJeu.activerCible(cible);
+        System.out.println("Yo");
         ciblage.play();
     }
 
     public void finAttaqueOrbital(){
+        sceneJeu.desactiverCible(cible);
         ciblage.stop();
     }
 

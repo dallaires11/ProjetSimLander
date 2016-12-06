@@ -11,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Path;
 import javafx.stage.Stage;
 
@@ -112,5 +113,13 @@ public class SceneJeu {
     private void setText(){
         gaz.setTextFill(Color.WHITE);
         points.setTextFill(Color.WHITE);
+    }
+
+    public void activerCible(Circle cible){
+        root.getChildren().add(cible);
+    }
+
+    public void desactiverCible(Circle cible){
+        root.getChildren().remove(cible);
     }
 }
