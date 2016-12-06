@@ -134,7 +134,7 @@ public class ControllerJeu implements TCI{
     private void collision() {
 
         double valeurPrecise1;
-        if(Math.round(vaisseau.getX()/10) >= 140){
+        if(Math.round(vaisseau.getX()/10) >= 140||Math.round(vaisseau.getX()/10)<0){
             valeurPrecise1 = sol.getSolValeurs().get(140);
         }
         else
@@ -142,7 +142,8 @@ public class ControllerJeu implements TCI{
                     + (((sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10) + 1)) - sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10) + 1))) / 10)));
 
         double valeurPrecise2;
-         if(((Math.round(vaisseau.getX()/10) + 2)) > 140)
+
+        if(((Math.round(vaisseau.getX()/10) + 2)) > 140||Math.round(vaisseau.getX()/10)<0)
              valeurPrecise2 = valeurPrecise1;
         else
         valeurPrecise2 = (sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10) + 2))
@@ -168,6 +169,7 @@ public class ControllerJeu implements TCI{
 
     private void chargementOption(){
         if(optChoisi.asaultOrbital()){
+            turret.setTir(diff);
             turret.commencerAttaqueObirtal(diff);
         }
 

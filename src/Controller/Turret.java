@@ -8,9 +8,13 @@ import Model.Vaisseau;
 import View.SceneJeu;
 import javafx.animation.*;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
+
+import java.io.File;
 
 public class Turret {
     private Vaisseau vaisseau;
@@ -19,18 +23,23 @@ public class Turret {
     private SceneJeu sceneJeu;
     private TCI tci;
     private int diff;
+    private MediaPlayer sonTir,tir1,tir2,tir3;
+    private PauseTransition chargement;
 
     public Turret(Vaisseau vaisseau,SceneJeu jeu){
         this.vaisseau=vaisseau;
         sceneJeu=jeu;
-        cible=new Circle(10);
+        cible=new Circle(50);
         diff=1;
+
+        tir1=new MediaPlayer(new Media(new File("src/Sound/sonTirEasy.mp3").toURI().toString()));
+        tir2=new MediaPlayer(new Media(new File("src/Sound/sonTirMedium.mp3").toURI().toString()));
+        tir3=new MediaPlayer(new Media(new File("src/Sound/sonTirHard.mp3").toURI().toString()));
 
         setImage();
 
-        initialiserTir();
         initialiserCiblage();
-
+        initialiserTir();
     }
 
     private void setImage(){
@@ -39,34 +48,40 @@ public class Turret {
 
     }
 
-    private void initialiserTir(){
-        FadeTransition ft= new FadeTransition(Duration.seconds(2/diff),cible);
-        ft.setFromValue(0);
-        ft.setToValue(1);
-        ft.setOnFinished(event->{
-            //initialiserCiblage();
-        });
+    private void initialiserCiblage(){
+        FadeTransition ftStart = new FadeTransition(Duration.seconds(0.5),cible);
+        ftStart.setFromValue(0);
+        ftStart.setToValue(1);
+        ftStart.setOnFinished(event-> tir());
         ciblage=new Timeline(new KeyFrame(Duration.seconds(4),event ->{
             sceneJeu.deplacerCible((int)vaisseau.getX(),(int)vaisseau.getY());
-            ft.playFromStart();
+            ftStart.playFromStart();
         }));
         ciblage.setCycleCount(Animation.INDEFINITE);
 
     }
-    private void initialiserCiblage(){
-        //SonChargement.play()
-        PauseTransition chargement=new PauseTransition(/*charmentSon.getTotalDuration()*/);
-        chargement.setOnFinished(event->{
-            //Sonchargement.stop();
-            touche();
-        });
+    private void initialiserTir(){
+        FadeTransition ftEnd = new FadeTransition(Duration.seconds(0.5),cible);
+        ftEnd.setFromValue(1);
+        ftEnd.setToValue(0);
+        ftEnd.setOnFinished(event-> sonTir.stop());
 
+        chargement=new PauseTransition(Duration.seconds(2/diff));
+        chargement.setOnFinished(event->{
+            touche();
+            ftEnd.playFromStart();
+
+        });
+    }
+
+    private void tir(){
+        sonTir.play();
+        chargement.playFromStart();
     }
 
     private void touche(){
         if(collisionTir());
-            tci.perdre();
-
+            //tci.perdre();
     }
 
     private boolean collisionTir(){
@@ -88,5 +103,22 @@ public class Turret {
 
     public void setInterfacePerdre(TCI tci){
         this.tci=tci;
+    }
+
+    public void setTir(int diff){
+        switch (diff){
+            case 1:
+                sonTir=tir1;
+                break;
+            case 2:
+                sonTir=tir2;
+                break;
+            case 3:
+                sonTir=tir3;
+                break;
+            default:
+                sonTir=null;
+                break;
+        }
     }
 }

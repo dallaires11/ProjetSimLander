@@ -101,3 +101,11 @@ public class Option implements OptionChoisi{
         return assault.isSelected();
     }
 }
+
+/*
+ven solaire forece sur cote
+Lumiere soudaine rend lecran blanc
+Météorite
+quand tubouge tu devien invisibel
+Moins ta te gaz + taccelaire
+ */
