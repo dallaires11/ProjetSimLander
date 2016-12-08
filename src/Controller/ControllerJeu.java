@@ -28,9 +28,10 @@ public class ControllerJeu implements TCI{
     private Points points;
     private OptionChoisi optChoisi;
     private Turret turret;
+    private TempeteSolaire tempete;
 
     public ControllerJeu(Vaisseau vaisseau, Sol sol, SceneJeu jeu,Stage leStage, Perdre perdu, Gagner gagne,
-                         Points points,Turret turret){
+                         Points points,Turret turret,TempeteSolaire tempete){
         this.jeu=jeu;
         this.vaisseau=vaisseau;
         this.sol=sol;
@@ -39,6 +40,7 @@ public class ControllerJeu implements TCI{
         this.gagne=gagne;
         this.points=points;
         this.turret=turret;
+        this.tempete=tempete;
 
         turret.setInterfacePerdre(this);
 
@@ -102,6 +104,7 @@ public class ControllerJeu implements TCI{
     private  void gagner(){
         stopMouvmentCollision();
         turret.finAttaqueOrbital();
+        tempete.stopTempete();
         points.stopPoint();
         finJeu();
         stage.setScene(gagne.getScene());
@@ -110,6 +113,7 @@ public class ControllerJeu implements TCI{
     public void perdre(){
         stopMouvmentCollision();
         turret.finAttaqueOrbital();
+        tempete.stopTempete();
         points.stopPoint();
         finJeu();
 
@@ -175,8 +179,8 @@ public class ControllerJeu implements TCI{
             turret.commencerAttaqueObirtal(diff);
         }
 
-        if (optChoisi.chaos()){
-            //Mode de jeu op
+        if (optChoisi.tempete()){
+            tempete.startTempete();
         }
 
         if (optChoisi.cheatEssence()){

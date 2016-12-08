@@ -4,7 +4,7 @@
 package Interface;
 
 public interface OptionChoisi {
-    public boolean chaos();
+    public boolean tempete();
 
     public boolean cheatEssence();
 

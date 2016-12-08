@@ -21,7 +21,7 @@ public class SceneJeu {
     private Group root;
     private Vaisseau vaisseau;
     private Path sol;
-    private ImageView fond;
+    private ImageView fond,alerte;
     private Label points,gaz;
 
     public SceneJeu(Stage stage){
@@ -29,11 +29,13 @@ public class SceneJeu {
         vaisseau=null;
         sol=null;
         fond=new ImageView("Image/fondJeu.jpg");
+        alerte=new ImageView("Image/alert.png");
         points=new Label("Points: 14000");
         gaz=new Label("Gaz: 1000L");
 
         setText();
         setPosition(stage);
+        setImage();
 
         root=new Group();
         root.getChildren().addAll(fond,gaz,points);
@@ -93,6 +95,13 @@ public class SceneJeu {
         vaisseau.setPosInitial(690,80);
     }
 
+    private void setImage(){
+        alerte.setFitHeight(50);
+        alerte.setFitWidth(50);
+        alerte.setTranslateY(250);
+        alerte.setTranslateX(1500);
+    }
+
     public boolean appuyerGaz(){
         return accelerationJoueur;
     }
@@ -129,5 +138,17 @@ public class SceneJeu {
     public void deplacerCible(int x, int y){
         root.getChildren().get(5).setTranslateX(x);
         root.getChildren().get(5).setTranslateY(y);
+    }
+
+    public Group getRoot(){
+        return root;
+    }
+
+    public void deplacerAlerte(int x){
+        alerte.setTranslateX(x);
+    }
+
+    public ImageView getAlerte(){
+        return alerte;
     }
 }

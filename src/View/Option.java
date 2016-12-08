@@ -20,9 +20,9 @@ import javafx.stage.Stage;
 public class Option implements OptionChoisi{
     private Scene option,menu;
     private ImageView fond;
-    private CheckBox chaos,god,assault;
+    private CheckBox tempete,god,assault;
     private Button retour;
-    Text infoChaos,infoGod,infoAssault;
+    Text infoTempete,infoGod,infoAssault;
     HBox opt1,opt2,opt3;
     VBox org;
 
@@ -33,15 +33,15 @@ public class Option implements OptionChoisi{
 
         retour=new Button("Retour");
 
-        chaos=new CheckBox();
-        infoChaos=new Text("Mode Chaos: ");
+        tempete=new CheckBox();
+        infoTempete=new Text("Tempete solaire: ");
         god=new CheckBox();
         infoGod=new Text("Infini Essence: ");
         assault=new CheckBox();
         infoAssault=new Text("Assault orbital: ");
 
         opt1=new HBox();
-        opt1.getChildren().addAll(infoChaos,chaos);
+        opt1.getChildren().addAll(infoTempete,tempete);
         opt2=new HBox();
         opt2.getChildren().addAll(infoGod,god);
         opt3=new HBox();
@@ -76,7 +76,7 @@ public class Option implements OptionChoisi{
 
     private void setText(){
         infoGod.setStroke(Color.WHITE);
-        infoChaos.setStroke(Color.WHITE);
+        infoTempete.setStroke(Color.WHITE);
         infoAssault.setStroke(Color.WHITE);
 
     }
@@ -89,8 +89,8 @@ public class Option implements OptionChoisi{
         menu=scene;
     }
 
-    public boolean chaos(){
-        return  chaos.isSelected();
+    public boolean tempete(){
+        return  tempete.isSelected();
     }
 
     public boolean cheatEssence(){

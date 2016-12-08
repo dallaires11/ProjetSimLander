@@ -1,7 +1,4 @@
-import Controller.ControllerJeu;
-import Controller.IntroJeu;
-import Controller.Points;
-import Controller.Turret;
+import Controller.*;
 import Interface.OptionChoisi;
 import Interface.TCI;
 import Model.Sol;
@@ -25,6 +22,7 @@ public class Main extends Application {
     private Gagner gagner;
     private IntroJeu intro;
     private Turret turret;
+    private TempeteSolaire tempete;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -36,7 +34,8 @@ public class Main extends Application {
         gagner=new Gagner(leStage);
         points=new Points(vueJeu);
         turret=new Turret(vaisseau,vueJeu);
-        controller=new ControllerJeu(vaisseau,sol,vueJeu,leStage,perdre,gagner,points,turret);
+        tempete=new TempeteSolaire(vueJeu);
+        controller=new ControllerJeu(vaisseau,sol,vueJeu,leStage,perdre,gagner,points,turret,tempete);
         choix=new Choix(leStage,controller);
         option=new Option(leStage);
         controller.setInterfaceChoix(option);
@@ -44,7 +43,6 @@ public class Main extends Application {
         intro=new IntroJeu();
         primaryStage.setTitle("SimLander");
         primaryStage.setScene(intro.getSceneIntro(leStage));
-        //primaryStage.setScene(menu.getSceneMenu());
         primaryStage.show();
     }
 
