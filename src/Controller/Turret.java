@@ -80,12 +80,14 @@ public class Turret {
     }
 
     private void touche(){
-        if(collisionTir());
-            //tci.perdre();
+        if(collisionTir()) {
+            System.out.println("Touche");
+            tci.perdre();
+        }
     }
 
     private boolean collisionTir(){
-        if(vaisseau.getBoundsInLocal().intersects(cible.getBoundsInLocal()))
+        if(vaisseau.getBoundsInParent().intersects(cible.getBoundsInParent()))
             return true;
         return false;
     }
