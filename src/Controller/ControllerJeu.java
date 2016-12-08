@@ -117,12 +117,12 @@ public class ControllerJeu implements TCI{
     }
 
     private void conditionVictoire(){
-        if(vaisseau.getX()/10 >= sol.getPlat1() && ((vaisseau.getX()+20)/10) <= sol.getPlat1() + (6/diff)) {
+        if(vaisseau.getX() >= sol.getPlat1()*10 - 3 && (vaisseau.getX()+20) <= sol.getPlat1() * 10 + (60/diff) + 3) {
             if (vaisseau.getVitesseY() <= 2 && vaisseau.getRotation() > 80 && vaisseau.getRotation() < 100)
                 gagner();
             else
                 perdre();
-        } else if (vaisseau.getX()/10 >= sol.getPlat2() && ((vaisseau.getX()+20)/10) <= sol.getPlat2() + (6/diff)){
+        } else if (vaisseau.getX() >= sol.getPlat2() * 10 - 3 && (vaisseau.getX()+20) <= sol.getPlat2() * 10 + 3 + (60/diff)){
             if (vaisseau.getVitesseY() <= 2 && vaisseau.getRotation() > 80 && vaisseau.getRotation() < 100)
                 gagner();
             else
@@ -138,24 +138,23 @@ public class ControllerJeu implements TCI{
             valeurPrecise1 = sol.getSolValeurs().get(140);
         }
         else
-            valeurPrecise1 = (sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10) + 1))
+            valeurPrecise1 = (sol.getSolValeurs().get((int) Math.round(vaisseau.getX()/10))
                     + (((sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10) + 1)) - sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10) + 1))) / 10)));
 
         double valeurPrecise2;
 
         if(((Math.round(vaisseau.getX()/10) + 2)) > 140||Math.round(vaisseau.getX()/10)<0)
+
              valeurPrecise2 = valeurPrecise1;
         else
         valeurPrecise2 = (sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10) + 2))
-
                 + (((sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10) + 1)) - sol.getSolValeurs().get((int) (Math.round(vaisseau.getX()/10) + 2))) / 10)));
 
 
         if (vaisseau.getY() >= valeurPrecise1 || vaisseau.getY() >= valeurPrecise2){
+            System.out.println("<----------------------->");
             System.out.println("X : " + vaisseau.getX());
-            System.out.println("X arrondi : " + (int) (Math.round(vaisseau.getX()/10)));
             System.out.println("X2 : " + (vaisseau.getX() + 20));
-            System.out.println("X2 arrondi : " + (int) (Math.round(vaisseau.getX()/10) + 2));
             System.out.println("Y : " + vaisseau.getY());
             System.out.println("rotation : " + vaisseau.getRotation());
             System.out.println("Vitesse : " + vaisseau.getVitesseY());
@@ -163,6 +162,9 @@ public class ControllerJeu implements TCI{
             System.out.println("sol 2 : " + valeurPrecise2);
             System.out.println("plat 1 : " + sol.getPlat1());
             System.out.println("plat 2 : " + sol.getPlat2());
+            System.out.println("<----------------------->");
+            System.out.println();
+
             conditionVictoire();
         }
     }
